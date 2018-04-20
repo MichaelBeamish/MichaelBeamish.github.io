@@ -1,0 +1,28 @@
+.headshot {
+	width: 200px;
+	border-radius: 50%;
+	margin: 10px;
+	border-style: outset;
+}
+
+.skill-icon {
+	height: 50px;
+}
+
+.project-img {
+	width: 100%;
+}
+
+.header {
+	background-color: #182636;
+	color: #b3b5ba;
+}
+
+.page_sections {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.project_format {
+	margin-bottom: 20px;
+}
