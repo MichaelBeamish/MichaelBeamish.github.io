@@ -1,0 +1,12 @@
+#myscreen {
+  height: 100vh;
+  width: auto;
+  background-color: blue;
+}
+
+#myimg {
+  height: 20em;
+  width: auto;
+  position: absolute;
+  z-index: 0;
+}
