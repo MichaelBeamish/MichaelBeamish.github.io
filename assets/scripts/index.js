@@ -34,7 +34,7 @@ Physics(function(world) {
   // constrain objects to these bounds
   edgeBounce = Physics.behavior("edge-collision-detection", {
     aabb: viewportBounds,
-    restitution: 0.2,
+    restitution: 0.99,
     cof: 0.1
   });
 
@@ -51,12 +51,12 @@ Physics(function(world) {
   );
 
   let myhead = Physics.body("rectangle", {
-    x: renderer.width * 0.083,
-    y: renderer.height * 0.108,
+    x: 350,
+    y: 236,
     styles: {
       src: "assets/images/head-icon.png",
-      width: 119,
-      height: 169
+      width: 237,
+      height: 337
     }
   });
   world.add(myhead);
@@ -87,16 +87,53 @@ Physics(function(world) {
     edgeBounce
   ]);
 
+  let timer = 0;
+  let clicked = false;
+
   // add things to the world
   document.getElementById("myscreen").addEventListener("click", function() {
     world.add([Physics.behavior("constant-acceleration")]);
     document.getElementById("myimg").src = "./assets/images/head-shot.jpg";
     myhead.state.vel.y = -0.2;
     myhead.state.vel.x = 0.4;
+    clicked = true;
+    console.log(myhead.state);
   });
 
   // subscribe to ticker to advance the simulation
   Physics.util.ticker.on(function(time) {
     world.step(time);
+    if (clicked === true) {
+      if (timer === 3) {
+        world.add(
+          Physics.body("circle", {
+            x: myhead.state.pos.x,
+            y: myhead.state.pos.y + 150,
+            vx: 0,
+            radius: Math.floor(Math.random() * 10 + 2),
+            styles: {
+              fillStyle: "#bf0000",
+              angleIndicator: "#bf0000"
+            }
+          })
+        );
+      }
+      if (timer === 6) {
+        world.add(
+          Physics.body("circle", {
+            x: myhead.state.pos.x,
+            y: myhead.state.pos.y + 150,
+            vx: 0,
+            radius: Math.floor(Math.random() * 10 + 2),
+            styles: {
+              fillStyle: "#800000",
+              angleIndicator: "#800000"
+            }
+          })
+        );
+        timer = 0;
+      }
+      timer++;
+    }
   });
 });
