@@ -1,0 +1,309 @@
+/*
+Theme Name: Simple Parallax Website
+Description: Simple Parallax Scrolling Effect
+Author: Samuel Dalusung
+*/
+
+/*= GENERAL STYLING
+--------------------------------------------------------*/
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+h1 {
+  font-family: "Arvo";
+  font-weight: normal;
+  text-align: center;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  font-family: "Arvo";
+  font-weight: normal;
+  text-align: center;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+h3 {
+  font-family: "Oswald";
+  font-weight: normal;
+  text-align: center;
+  margin: 5px 0;
+  padding: 0;
+  z-index: 1;
+  position: relative;
+}
+
+.center {
+  margin: 0 auto;
+}
+.content {
+  margin: 0 auto;
+  width: 960px;
+}
+.clear {
+  clear: both;
+}
+a.rpanel {
+  float: right;
+  color: #e1e1e1;
+  font-size: 0.8em;
+  font-family: "Wellfleet";
+  text-decoration: none;
+  margin: 7px 11px;
+}
+
+a.lpanel:hover {
+  color: #fff;
+}
+a.rpanel:hover {
+  color: #fff;
+}
+.g-logo {
+  width: 1.5em;
+}
+
+/*= HEADER & NAVIGATION
+--------------------------------------------------------*/
+
+#header {
+  width: 100%;
+  background: url("../img/header-bg.png");
+  height: 80px;
+  position: fixed;
+  margin-top: 30px;
+}
+
+#nav {
+  width: 410px;
+  float: right;
+  margin-top: 20px;
+}
+#logo a {
+  color: #fff;
+  text-decoration: none;
+  float: left;
+  font-size: 2.5em;
+  margin-top: 0.2em;
+  color: #fff;
+  font-family: "Abril Fatface", cursive;
+}
+#nav ul {
+  list-style: none;
+  display: block;
+  margin: 0 auto;
+  list-style: none;
+}
+
+#nav li {
+  margin-top: 9px;
+  float: left;
+  padding-left: 21px;
+}
+
+#nav li a {
+  color: #fff;
+  opacity: 0.6;
+  text-decoration: none;
+  font-family: "Wellfleet";
+}
+#nav li a.active {
+  color: #fff;
+  opacity: 1;
+  border-bottom: 2px solid #fff;
+}
+#nav li a:hover {
+  color: #fff;
+  opacity: 1;
+}
+
+/*= BUTTONS
+--------------------------------------------------------*/
+
+button.btn-know {
+  padding: 15px 47px;
+  margin: 40px 38.8%;
+  text-align: center;
+  border: 4px solid #fff;
+  color: #fff;
+  background: transparent;
+  cursor: pointer;
+  text-shadow: -1px 2px 0px rgba(90, 90, 90, 0.56);
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.btn-know:hover {
+  background: #fff;
+  color: transparent;
+}
+ul.built {
+  list-style: none;
+  margin: 0 auto;
+  width: 730px;
+}
+.built li img {
+  float: left;
+  padding-right: 34px;
+}
+
+/*= SLIDES STYLING
+--------------------------------------------------------*/
+#slide1 {
+  width: 100%;
+  background: url("../img/slide1.jpg") 50% 0 no-repeat fixed;
+  color: white;
+  margin: 0;
+  padding: 10em;
+  background-size: 100% auto;
+}
+
+#slide2 {
+  width: 100%;
+  background-color: #fff;
+  color: #333333;
+  height: 35em;
+  margin: 0 auto;
+  overflow: hidden;
+  padding-top: 8em;
+}
+
+#slide3 {
+  width: 100%;
+  background: url(../img/slide3.jpg) 50% 0 no-repeat fixed;
+  color: #fff;
+  height: 65em;
+  padding-top: 6em;
+  background-size: 100% auto;
+}
+
+#slide4 {
+  width: 100%;
+  background-color: #fff;
+  color: #333333;
+  height: 25em;
+  padding-top: 8em;
+}
+
+#slide5 {
+  width: 100%;
+  background: url(../img/slide5.jpg) 50% 0 no-repeat fixed;
+  height: 20em;
+  color: #fff;
+  background-size: 100% auto;
+  background-position-y: 32em;
+}
+
+/*= FOOTER 
+--------------------------------------------------------*/
+
+#footer {
+  color: black;
+  font-family: "Wellfleet";
+  padding-top: 8em;
+  text-align: center;
+}
+/*= COLORS 
+--------------------------------------------------------*/
+.my-orange-text {
+  color: #f18f01;
+}
+.my-blue-text {
+  color: #048ba8;
+}
+.my-grey-text {
+  color: #2e4057;
+}
+.my-green-text {
+  color: #99c24d;
+}
+.my-dark-text {
+  color: #2f2d23;
+}
+.my-orange-background {
+  background: #f18f01;
+}
+.my-blue-background {
+  background: #048ba8;
+}
+.my-grey-background {
+  background: #2e4057;
+}
+.my-green-background {
+  background: #99c24d;
+}
+.my-dark-background {
+  background: #2f2d23;
+}
+.my-black-background {
+  background: black;
+}
+
+.title-container {
+  width: 100%;
+  display: flex;
+  align-items: left;
+}
+
+.wellfleet {
+  font-family: "Wellfleet";
+}
+
+.fatface {
+  font-family: "Abril Fatface", cursive;
+}
+
+.my-card {
+  background-color: hsla(0, 0%, 19%, 0.75);
+  padding: 3em;
+  margin-top: 4em;
+  border-radius: 0.5em;
+}
+.skills-container {
+  text-align: center;
+  margin-bottom: 20em;
+}
+.skill-icon {
+  height: 7em;
+  margin: 1em;
+}
+.projet-card {
+  margin-top: 1em;
+  color: #333333;
+  font-family: "Wellfleet";
+  height: 34em;
+}
+.project-links {
+  text-align: center;
+  margin-bottom: 0.25em;
+}
+.project-icon {
+  width: 2em;
+  margin: 0.25em;
+}
+.profile-pic {
+  width: 20em;
+  margin-bottom: 1.5em;
+  border-radius: 12px;
+}
+.contact-container {
+  margin-top: 2em;
+  font-family: "Wellfleet";
+}
+.fa {
+  color: #333333;
+  margin: 0 0.5em;
+}
+.footer-card {
+  background-color: hsla(0, 0%, 19%, 0.75);
+  color: white;
+  padding-top: 1.5em;
+  padding-bottom: 1em;
+  border-radius: 0.5em;
+}
