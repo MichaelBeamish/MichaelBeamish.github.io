@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Michael Beamish - Portfolio</title>
     <!-- MY CSS -->
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/style-mobile.css" />
     <!-- JQUERY -->
     <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
     <!-- MY JavaScript/JQUERY -->
@@ -70,20 +70,14 @@
       defer
     ></script>
     <script type="text/javascript">
-      if (screen.width <= 699) {
-      document.location = "mobile.html";
+      if (screen.width > 699) {
+      document.location = "index.html";
       }
       </script>
   </head>
   <body>
-    <div id="demo_back">
-      <a href="https://github.com/MichaelBeamish/MichaelBeamish.github.io" class="rpanel"
-        target="_blank"><i class="fa fa-github text-white"> View On GitHub >></i>
-      </a>
-    </div>
-
     <header id="header">
-      <div class="container">
+      <div>
         <div id="logo"><a href="#">Michael Beamish</a></div>
         <nav id="nav">
           <ul>
@@ -100,10 +94,12 @@
 
     <div id="slide1">
       <div class="container my-card text-center">
-          <img class="profile-pic" src="./img/headshot.jpg" alt="profile pic">
-        <h4 class="wellfleet text-center">
-            "Hello everyone! My name is Mike. I am a software developer in Phoenix, Arizona."
-        </h4>
+        <div class="row">
+          <div class="col-6"><img class="profile-pic" src="./img/headshot.jpg" alt="profile pic"></div>
+          <div class="col-6 d-flex align-items-center"><h2 class="wellfleet text-center">
+              "Hello everyone! My name is Mike. I am a software developer in Phoenix, Arizona."
+          </h2></div>
+        </div>
       </div>
     </div>
 
@@ -137,7 +133,7 @@
             PROJECTS
         </h1>
         <div class="row">
-          <div class="col-3">
+          <div class="col-6">
             <div class="card projet-card">
               <img class="card-img-top" src="./img/love-letter.jpg">
               <div class="card-body">
@@ -153,7 +149,7 @@
               </div>
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-6">
             <div class="card projet-card">
               <img class="card-img-top" src="./img/battleship.jpg">
               <div class="card-body">
@@ -168,7 +164,8 @@
               </div>
             </div>
           </div>
-          <div class="col-3">
+          <div class="row">
+          <div class="col-6">
             <div class="card projet-card">
               <img class="card-img-top" src="./img/backpack.jpg">
                   <div class="card-body">
@@ -183,7 +180,7 @@
               </div>
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-6">
             <div class="card projet-card">
               <img class="card-img-top" src="./img/satellite.jpg">
                   <div class="card-body">
@@ -198,6 +195,7 @@
                     </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>
