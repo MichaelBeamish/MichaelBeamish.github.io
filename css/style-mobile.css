@@ -1,39 +1,15 @@
 /*= GENERAL STYLING
 --------------------------------------------------------*/
-
 body {
   margin: 0;
   padding: 0;
-  width: 100%;
+  background: url("../img/slide1.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
 }
-h1 {
-  font-family: "Arvo";
-  font-weight: normal;
-  text-align: center;
-  color: #fff;
-  margin: 0;
-  padding: 0;
-}
-
-h2 {
-  font-family: "Arvo";
-  font-weight: normal;
-  text-align: center;
-  color: #fff;
-  margin: 0;
-  padding: 0;
-}
-
-h3 {
-  font-family: "Oswald";
-  font-weight: normal;
-  text-align: center;
-  margin: 5px 0;
-  padding: 0;
-  z-index: 1;
-  position: relative;
-}
-
 .center {
   margin: 0 auto;
 }
@@ -41,166 +17,18 @@ h3 {
   margin: 0 auto;
   width: 960px;
 }
-.clear {
-  clear: both;
-}
-a.rpanel {
-  float: right;
-  color: #e1e1e1;
-  font-size: 0.8em;
-  font-family: "Wellfleet";
-  text-decoration: none;
-  margin: 7px 11px;
-}
-a.rpanel:hover {
-  color: #fff;
-}
 .g-logo {
   width: 1.5em;
 }
 
-/*= HEADER & NAVIGATION
---------------------------------------------------------*/
-
-#header {
-  width: 100%;
-  background: url("../img/header-bg.png");
-  height: 80px;
-  position: fixed;
-  margin-top: 0.25em;
-  z-index: 1;
-}
-
-#nav {
-  width: 410px;
-  float: right;
-  margin-top: 20px;
-}
-#logo a {
-  color: #fff;
-  text-decoration: none;
-  float: left;
-  font-size: 3em;
-  padding-left: 2em;
-  color: #fff;
-  font-family: "Abril Fatface", cursive;
-}
-#nav ul {
-  list-style: none;
-  display: block;
-  margin: 0 auto;
-  list-style: none;
-}
-
-#nav li {
-  margin-top: 0.25em;
-  float: left;
-  padding-left: 0.5em;
-  font-size: 1.4em;
-}
-
-#nav li a {
-  color: #fff;
-  opacity: 0.6;
-  text-decoration: none;
-  font-family: "Wellfleet";
-}
-#nav li a.active {
-  color: #fff;
-  opacity: 1;
-  border-bottom: 2px solid #fff;
-}
-#nav li a:hover {
-  color: #fff;
-  opacity: 1;
-}
-
-/*= BUTTONS
---------------------------------------------------------*/
-
-button.btn-know {
-  padding: 15px 47px;
-  margin: 40px 38.8%;
-  text-align: center;
-  border: 4px solid #fff;
-  color: #fff;
-  background: transparent;
-  cursor: pointer;
-  text-shadow: -1px 2px 0px rgba(90, 90, 90, 0.56);
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-}
-
-.btn-know:hover {
-  background: #fff;
-  color: transparent;
-}
-ul.built {
-  list-style: none;
-  margin: 0 auto;
-  width: 730px;
-}
-.built li img {
-  float: left;
-  padding-right: 34px;
-}
-
 /*= SLIDES STYLING
 --------------------------------------------------------*/
-#slide1 {
+.slide {
   width: 100%;
-  background: url("../img/slide1.jpg") 50% 0 no-repeat fixed;
   color: white;
-  height: 38em;
-  margin: 0;
-  padding: 10em;
-  background-size: 100% auto;
+  margin: 1em 0;
 }
 
-#slide2 {
-  width: 100%;
-  background-color: #fff;
-  color: #333333;
-  height: 25em;
-  margin: 0 auto;
-  overflow: hidden;
-}
-
-#slide3 {
-  width: 100%;
-  background: url(../img/slide3.jpg) 50% 0 no-repeat fixed;
-  color: #fff;
-  height: 65em;
-  padding-top: 6em;
-  background-size: 100% auto;
-}
-
-#slide4 {
-  width: 100%;
-  background-color: #fff;
-  color: #333333;
-  height: 25em;
-  padding-top: 8em;
-}
-
-#slide5 {
-  width: 100%;
-  background: url(../img/slide5.jpg) 50% 0 no-repeat fixed;
-  height: 20em;
-  color: #fff;
-  background-size: 100% auto;
-  background-position-y: 32em;
-}
-
-/*= FOOTER 
---------------------------------------------------------*/
-
-#footer {
-  color: black;
-  font-family: "Wellfleet";
-  padding-top: 8em;
-  text-align: center;
-}
 /*= COLORS 
 --------------------------------------------------------*/
 .my-orange-text {
@@ -237,10 +65,8 @@ ul.built {
   background: black;
 }
 
-.title-container {
-  width: 100%;
-  display: flex;
-  align-items: left;
+.my-title {
+  font-size: 3em;
 }
 
 .wellfleet {
@@ -252,6 +78,8 @@ ul.built {
 }
 
 .my-card {
+  margin: 2em auto;
+  width: 92%;
   background-color: hsla(0, 0%, 19%, 0.75);
   padding: 2em;
   border-radius: 0.5em;
@@ -260,34 +88,36 @@ ul.built {
   text-align: center;
 }
 .skill-icon {
-  height: 6em;
-  margin: 0.25em;
+  height: 7.5em;
+  margin: 0.5em;
 }
 .projet-card {
   margin-top: 1em;
   color: #333333;
   font-family: "Wellfleet";
-  height: 34em;
+  height: 54em;
+}
+.card-text {
+  font-size: 1.75em;
 }
 .project-links {
   text-align: center;
   margin-bottom: 0.25em;
 }
 .project-icon {
-  width: 2em;
-  margin: 0.25em;
+  width: 4em;
+  margin: 0.75em;
 }
 .profile-pic {
   width: 20em;
   border-radius: 12px;
 }
 .contact-container {
-  margin-top: 2em;
   font-family: "Wellfleet";
 }
 .fa {
   color: #333333;
-  margin: 0 0.5em;
+  margin: 0.25em 1em;
 }
 .footer-card {
   background-color: hsla(0, 0%, 19%, 0.75);
