@@ -3,7 +3,8 @@
 body {
   margin: 0;
   padding: 0;
-  background: url("../img/slide1.jpg") no-repeat center center fixed;
+  background: url("../img/slide1.jpg");
+  background-attachment: fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
