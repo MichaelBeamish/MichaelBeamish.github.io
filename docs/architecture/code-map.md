@@ -19,8 +19,9 @@
 |---|---|---|
 | `src/main.ts` | Entry: mounts the Vue app | — |
 | `src/App.vue` | The shell: the Creature World iframe, the screen (sticky nav + `PortfolioPage`), the way back; Escape and focus handling; the dev-only tuning panel (lazy, never in production) | — |
-| `src/PortfolioPage.vue` | The portfolio itself: lays out `content.ts` (about, projects, experience, contact); the 2018–19 group is a collapsed `<details>`; emits `lift` from The Ink Tank card | — |
-| `src/content.ts` | Everything the site says, as data: profile, featured project, the 2018–19 projects, experience, education, contact | `Link`, `Project`, `Job`, `PROFILE`, `FEATURED`, `EARLY_PROJECTS_INTRO`, `EARLY_PROJECTS`, `EXPERIENCE`, `EDUCATION`, `CONTACT` |
+| `src/PortfolioPage.vue` | The portfolio itself: lays out `content.ts` (about, projects, experience, contact); the 2018–19 group is a collapsed `<details>`; Contact shows `EMAIL` with a Copy button (Clipboard API, `role="status"` announcement); emits `lift` from The Ink Tank card | — |
+| `src/content.ts` | Everything the site says, as data: profile, featured project, the 2018–19 projects, experience, education, contact | `ICON_NAMES`, `IconName`, `Link`, `Project`, `Job`, `PROFILE`, `FEATURED`, `EARLY_PROJECTS_INTRO`, `EARLY_PROJECTS`, `EXPERIENCE`, `EDUCATION`, `EMAIL`, `CONTACT` |
+| `src/LinkIcon.vue` | The small inline SVG icons next to links and on the Copy button (`IconName`: github, linkedin, mail, play, open, copy, check); `aria-hidden`, colored by `currentColor` | — |
 | `src/assets/profile.webp` | The profile photo (480 px WebP; imported, so Vite gives it a hashed filename) | — |
 | `src/assets/2019/` | Screenshots for the 2018–19 project cards (the demo videos' thumbnails, 640 px WebP; a friend's name blurred on `love-letter.webp`) | — |
 | `src/assets/fonts/` | Fredoka (headings; Latin subset, 30 KB woff2) and its license, `OFL.txt` — loaded by the `@font-face` in `src/App.vue` | — |
@@ -46,6 +47,7 @@
 | How colorful the world shows through | `SCREEN.saturate` | `src/screen.ts` |
 | How long lifting / lowering the screen takes | `SCREEN.liftSeconds` | `src/screen.ts` |
 | The tuning slider ranges | `LIMITS.blur` | `src/screen.ts` |
+| How long "Copied!" shows on the email's Copy button | `COPY.resetMs` | `src/PortfolioPage.vue` |
 
 ## Common changes (recipes)
 

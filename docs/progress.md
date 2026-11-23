@@ -2,6 +2,19 @@
 
 Newest first. One entry per verified task or significant decision.
 
+## 2026-11-23 — Task #8 done: the email with a Copy button, icons on every link
+- **Email:** Contact now shows the address itself (`EMAIL` in `content.ts`) with a **Copy** button — `mailto:` did
+  nothing on the owner's laptop (no default mail app), which is common. Clipboard API; on failure the address is
+  selected and the button says "Press Ctrl+C". The result is announced through a `role="status"` live region.
+- **Icons:** every link names an icon in `content.ts` (`Link.icon`, typed by `ICON_NAMES`); `LinkIcon.vue` draws
+  them as inline SVG (`currentColor`, `aria-hidden`) — GitHub mark from Simple Icons (CC0); the "in" mark, envelope,
+  play, open, copy and check drawn here (LinkedIn's logo was removed from Simple Icons at LinkedIn's request).
+- The résumé link is now task #10 (waiting for a PDF without the phone number).
+- Verified: 13 tests (new: every link has a drawable icon; the address looks valid); all five checks; Chrome over
+  CDP at 1280 and 375 px with clipboard permission granted — Copy puts the address on the clipboard (read back),
+  "Copied!" + announcement, reset after 2.5 s; with the Clipboard API forced to fail, the address is selected and
+  explained; 13/13 links have an icon, all hidden from screen readers, accessible names are just the text.
+
 ## 2026-11-23 — Task #7 done: the nav stays at the top
 - The nav is `position: sticky` inside the scrolling `.screen`: see-through at the top, then a solid bar in the
   screen's color fades in over the first 80 px (scroll-driven animation, `animation-timeline: scroll()`; browsers

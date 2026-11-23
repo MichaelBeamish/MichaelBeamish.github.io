@@ -9,10 +9,16 @@ import loveLetterShot from './assets/2019/love-letter.webp'
 import satelliteShot from './assets/2019/satellite.webp'
 import profilePhoto from './assets/profile.webp'
 
+/** The icons `LinkIcon.vue` can draw. */
+export const ICON_NAMES = ['github', 'linkedin', 'mail', 'play', 'open', 'copy', 'check'] as const
+export type IconName = (typeof ICON_NAMES)[number]
+
 export interface Link {
   /** What the link does, e.g. "Code" — the page adds the project's name for screen readers. */
   label: string
   href: string
+  /** Shown before the label (decorative; hidden from screen readers). */
+  icon: IconName
 }
 
 export interface Project {
@@ -64,8 +70,12 @@ export const FEATURED: Project = {
   challenge: "Challenge: Cheer up the grumpy one. (They don't love being shaken.)",
   stack: ['Vue 3', 'TypeScript', 'Canvas 2D', 'Web Audio', 'Vitest', 'GitHub Actions'],
   links: [
-    { label: 'Open full screen', href: 'https://michaelbeamish.github.io/creature-world/' },
-    { label: 'Code', href: 'https://github.com/MichaelBeamish/creature-world' },
+    {
+      label: 'Open full screen',
+      href: 'https://michaelbeamish.github.io/creature-world/',
+      icon: 'open',
+    },
+    { label: 'Code', href: 'https://github.com/MichaelBeamish/creature-world', icon: 'github' },
   ],
 }
 
@@ -86,8 +96,12 @@ export const EARLY_PROJECTS: Project[] = [
       'play online.',
     stack: ['React', 'Redux', 'Firebase'],
     links: [
-      { label: 'Watch the demo (4:37)', href: 'https://youtu.be/pt1HOM-q53g' },
-      { label: 'Code', href: 'https://github.com/MichaelBeamish/react-love-letter' },
+      { label: 'Watch the demo (4:37)', href: 'https://youtu.be/pt1HOM-q53g', icon: 'play' },
+      {
+        label: 'Code',
+        href: 'https://github.com/MichaelBeamish/react-love-letter',
+        icon: 'github',
+      },
     ],
     image: loveLetterShot,
     imageAlt:
@@ -98,8 +112,8 @@ export const EARLY_PROJECTS: Project[] = [
     description: 'My third-quarter project at Galvanize: the classic game, two players, online.',
     stack: ['React', 'Redux', 'Firebase', 'Materialize'],
     links: [
-      { label: 'Watch the demo (5:08)', href: 'https://youtu.be/XMg4Y0VVmyI' },
-      { label: 'Code', href: 'https://github.com/MichaelBeamish/react-battleship' },
+      { label: 'Watch the demo (5:08)', href: 'https://youtu.be/XMg4Y0VVmyI', icon: 'play' },
+      { label: 'Code', href: 'https://github.com/MichaelBeamish/react-battleship', icon: 'github' },
     ],
     image: battleshipShot,
     imageAlt:
@@ -111,8 +125,8 @@ export const EARLY_PROJECTS: Project[] = [
       'Our second-quarter group project: an app that keeps track of who is bringing what on a camping trip.',
     stack: ['Node.js', 'Express', 'PostgreSQL', 'Bootstrap'],
     links: [
-      { label: 'Watch the demo (6:32)', href: 'https://youtu.be/ZEuZAw5rHDY' },
-      { label: 'Code', href: 'https://github.com/MichaelBeamish/Backpack-project' },
+      { label: 'Watch the demo (6:32)', href: 'https://youtu.be/ZEuZAw5rHDY', icon: 'play' },
+      { label: 'Code', href: 'https://github.com/MichaelBeamish/Backpack-project', icon: 'github' },
     ],
     image: backpackShot,
     imageAlt:
@@ -124,8 +138,8 @@ export const EARLY_PROJECTS: Project[] = [
       'My first project at Galvanize: live satellite positions on a map, from several public APIs.',
     stack: ['Node.js', 'Axios', 'Bootstrap'],
     links: [
-      { label: 'Watch the demo (3:31)', href: 'https://youtu.be/HotoO9cmhHY' },
-      { label: 'Code', href: 'https://github.com/MichaelBeamish/q1-project' },
+      { label: 'Watch the demo (3:31)', href: 'https://youtu.be/HotoO9cmhHY', icon: 'play' },
+      { label: 'Code', href: 'https://github.com/MichaelBeamish/q1-project', icon: 'github' },
     ],
     image: satelliteShot,
     imageAlt:
@@ -172,8 +186,11 @@ export const EDUCATION = [
   'Tech Talent South — Full-Stack Web Development, 2018',
 ]
 
+/** Shown on the page (with a Copy button) — not everyone has a mail app set up for `mailto:` links. */
+export const EMAIL = 'michaelbeamish89@gmail.com'
+
+/** The other ways to reach the owner (email has its own row, see `EMAIL`). */
 export const CONTACT: Link[] = [
-  { label: 'Email', href: 'mailto:michaelbeamish89@gmail.com' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/michael-beamish/' },
-  { label: 'GitHub', href: 'https://github.com/MichaelBeamish' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/michael-beamish/', icon: 'linkedin' },
+  { label: 'GitHub', href: 'https://github.com/MichaelBeamish', icon: 'github' },
 ]
