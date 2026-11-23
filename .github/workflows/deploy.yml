@@ -47,6 +47,9 @@ jobs:
         run: pnpm typecheck
       - name: Test
         run: pnpm test
+      # The latest commit's date, for the page's "Last updated" footer (read by Vite as import.meta.env).
+      - name: Record the commit date
+        run: echo "VITE_LAST_UPDATED=$(git log -1 --format=%cI)" >> "$GITHUB_ENV"
       - name: Build
         run: pnpm build
 

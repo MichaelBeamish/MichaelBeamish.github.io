@@ -11,10 +11,15 @@ import {
   EXPERIENCE,
   FEATURED,
   PROFILE,
+  SITE_SOURCE,
 } from './content'
+import { formatLastUpdated } from './lastUpdated'
 import LinkIcon from './LinkIcon.vue'
 
 defineEmits<{ lift: [] }>()
+
+/** From the deploy workflow (the latest commit's date); absent in local builds, so the footer leaves it out. */
+const lastUpdated = formatLastUpdated(import.meta.env.VITE_LAST_UPDATED)
 
 /** Copy-email feedback, and how long it stays before the button resets (ms). */
 const COPY = { resetMs: 2500 }
@@ -180,13 +185,23 @@ onBeforeUnmount(() => clearTimeout(resetTimer))
       </div>
     </section>
   </main>
+
+  <footer class="footer">
+    <span v-if="lastUpdated">
+      Last updated <time :datetime="lastUpdated.date">{{ lastUpdated.label }}</time>
+    </span>
+    <a :href="SITE_SOURCE.href" target="_blank" rel="noopener">
+      <LinkIcon :name="SITE_SOURCE.icon" />
+      {{ SITE_SOURCE.label }}<span class="sr-only"> (opens in a new tab)</span>
+    </a>
+  </footer>
 </template>
 
 <style scoped>
 .page {
   max-width: 820px;
   margin: 6vh auto 0;
-  padding: 0 24px 80px;
+  padding: 0 24px 56px;
   line-height: 1.6;
 }
 section {
@@ -458,6 +473,24 @@ a:focus-visible {
   margin: 0;
   font-size: 0.9rem;
   opacity: 0.8;
+}
+/* A quiet line under everything: when the site last changed, and where its code lives. */
+.footer {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 20px 24px 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.85rem;
+  color: rgba(238, 243, 247, 0.72);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 24px;
+}
+.footer a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 .sr-only {
   position: absolute;

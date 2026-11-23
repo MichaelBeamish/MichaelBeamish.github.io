@@ -2,6 +2,19 @@
 
 Newest first. One entry per verified task or significant decision.
 
+## 2026-11-23 — Task #9 done: "Last updated" footer and a source link
+- A footer under the page: "Last updated <date>" and "Source on GitHub" (this repo). The date is the latest
+  commit's: the deploy workflow records it (`git log -1 --format=%cI`) as `VITE_LAST_UPDATED`, Vite exposes it as
+  `import.meta.env`, and `formatLastUpdated` (`src/lastUpdated.ts`) shows the commit's own calendar date, the same
+  in every visitor's time zone. Local builds have no date, so the footer shows only the link.
+- Changed from the spec: reading git inside `vite.config.ts` would have needed `@types/node` (a new dependency), so
+  the workflow passes the date in instead — no dependency, and CI owns the fact. `src/env.d.ts` types both `VITE_*`
+  variables.
+- Verified: 16 tests (new: formatting, a late-evening commit keeps its date, bad or missing input → no date); all
+  five checks; Chrome at 1280 and 375 px with a date build (`<time datetime="2026-11-23">`, footer outside `<main>`)
+  and a plain build (link only). The workflow step itself runs for the first time on this merge — checked on the
+  live site after.
+
 ## 2026-11-23 — Task #8 done: the email with a Copy button, icons on every link
 - **Email:** Contact now shows the address itself (`EMAIL` in `content.ts`) with a **Copy** button — `mailto:` did
   nothing on the owner's laptop (no default mail app), which is common. Clipboard API; on failure the address is

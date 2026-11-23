@@ -19,9 +19,11 @@
 |---|---|---|
 | `src/main.ts` | Entry: mounts the Vue app | — |
 | `src/App.vue` | The shell: the Creature World iframe, the screen (sticky nav + `PortfolioPage`), the way back; Escape and focus handling; the dev-only tuning panel (lazy, never in production) | — |
-| `src/PortfolioPage.vue` | The portfolio itself: lays out `content.ts` (about, projects, experience, contact); the 2018–19 group is a collapsed `<details>`; Contact shows `EMAIL` with a Copy button (Clipboard API, `role="status"` announcement); emits `lift` from The Ink Tank card | — |
-| `src/content.ts` | Everything the site says, as data: profile, featured project, the 2018–19 projects, experience, education, contact | `ICON_NAMES`, `IconName`, `Link`, `Project`, `Job`, `PROFILE`, `FEATURED`, `EARLY_PROJECTS_INTRO`, `EARLY_PROJECTS`, `EXPERIENCE`, `EDUCATION`, `EMAIL`, `CONTACT` |
+| `src/PortfolioPage.vue` | The portfolio itself: lays out `content.ts` (about, projects, experience, contact) and the footer ("Last updated", source link); the 2018–19 group is a collapsed `<details>`; Contact shows `EMAIL` with a Copy button (Clipboard API, `role="status"` announcement); emits `lift` from The Ink Tank card | — |
+| `src/content.ts` | Everything the site says, as data: profile, featured project, the 2018–19 projects, experience, education, contact | `ICON_NAMES`, `IconName`, `Link`, `Project`, `Job`, `PROFILE`, `FEATURED`, `EARLY_PROJECTS_INTRO`, `EARLY_PROJECTS`, `EXPERIENCE`, `EDUCATION`, `EMAIL`, `SITE_SOURCE`, `CONTACT` |
 | `src/LinkIcon.vue` | The small inline SVG icons next to links and on the Copy button (`IconName`: github, linkedin, mail, play, open, copy, check); `aria-hidden`, colored by `currentColor` | — |
+| `src/lastUpdated.ts` | Formats the footer's "Last updated" date from the commit date the deploy passes in (`VITE_LAST_UPDATED`); `null` when absent (local builds) | `LastUpdated`, `formatLastUpdated` |
+| `src/env.d.ts` | Types the `VITE_*` variables the app reads (`VITE_CREATURE_WORLD_URL`, `VITE_LAST_UPDATED`) | — |
 | `src/assets/profile.webp` | The profile photo (480 px WebP; imported, so Vite gives it a hashed filename) | — |
 | `src/assets/2019/` | Screenshots for the 2018–19 project cards (the demo videos' thumbnails, 640 px WebP; a friend's name blurred on `love-letter.webp`) | — |
 | `src/assets/fonts/` | Fredoka (headings; Latin subset, 30 KB woff2) and its license, `OFL.txt` — loaded by the `@font-face` in `src/App.vue` | — |
@@ -35,7 +37,7 @@
 |---|---|
 | `vite.config.ts` | Vite + Vitest config (`base` `/`: a GitHub user site is served from the domain root) |
 | `.github/workflows/ci.yml` | CI on every PR and push to `main`: format, lint, typecheck, test, build |
-| `.github/workflows/deploy.yml` | Deploy on every push to `main`: the same checks, then publish `dist/` to GitHub Pages (ADR 0002) |
+| `.github/workflows/deploy.yml` | Deploy on every push to `main`: the same checks, then publish `dist/` to GitHub Pages (ADR 0002); passes the latest commit's date to the build as `VITE_LAST_UPDATED` |
 | `.gitignore` | Also keeps the owner's resume PDF (`docs/*resume*.pdf`) out of the public repo |
 
 ## To change X, edit Y
@@ -53,6 +55,10 @@
 
 **Change any text, link or project on the site:** edit `src/content.ts` (layout lives in `src/PortfolioPage.vue`).
 `src/content.test.ts` checks links are `https:`/`mailto:` and that no phone number slips in.
+
+**See the "Last updated" date locally:** build with the variable the deploy sets —
+`VITE_LAST_UPDATED=$(git log -1 --format=%cI) pnpm build && pnpm preview` (Git Bash). Without it the footer only
+shows the source link.
 
 **Change the heading font:** swap the `.woff2` in `src/assets/fonts/` (keep its license beside it), then update the
 `@font-face` and the `h1, h2, h3, h4, .display` rule in the global `<style>` of `src/App.vue`.
