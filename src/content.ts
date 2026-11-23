@@ -10,7 +10,16 @@ import satelliteShot from './assets/2019/satellite.webp'
 import profilePhoto from './assets/profile.webp'
 
 /** The icons `LinkIcon.vue` can draw. */
-export const ICON_NAMES = ['github', 'linkedin', 'mail', 'play', 'open', 'copy', 'check'] as const
+export const ICON_NAMES = [
+  'github',
+  'linkedin',
+  'mail',
+  'play',
+  'open',
+  'copy',
+  'check',
+  'file',
+] as const
 export type IconName = (typeof ICON_NAMES)[number]
 
 export interface Link {
@@ -53,7 +62,7 @@ export const PROFILE = {
     'In 2022 I stepped away from software to raise my kids. Now I’m back and building again: The Ink Tank — the ' +
       'little world living behind this page — and this site are my first projects since, made with Vue 3, strict ' +
       'TypeScript, Vitest and a CI + pull-request workflow, with Claude Code as my pair programmer.',
-    "I'm open to frontend and full-stack roles — remote, and I'd consider relocating.",
+    "I'm open to frontend and full-stack roles — remote or relocation.",
   ],
 }
 
@@ -188,6 +197,12 @@ export const EDUCATION = [
 
 /** Shown on the page (with a Copy button) — not everyone has a mail app set up for `mailto:` links. */
 export const EMAIL = 'michaelbeamish89@gmail.com'
+
+/**
+ * The owner's résumé — a phone-free public copy in `public/resume.pdf` (served as-is at a fixed address). The private
+ * copy with the phone number stays in `docs/` (git-ignored). Read any new version in full before replacing it.
+ */
+export const RESUME: Link = { label: 'Résumé (PDF)', href: '/resume.pdf', icon: 'file' }
 
 /** This site's own code, linked from the footer. */
 export const SITE_SOURCE: Link = {

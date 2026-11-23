@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // Small inline SVG icons (task #8) — no icon library. They take the text color (`currentColor`), sit on the text's
 // baseline at 1em, and are hidden from screen readers: the link or button text next to them says what they do.
-// GitHub mark: Simple Icons (CC0, public domain). The rest are simple shapes drawn here; the "in" mark is drawn
+// GitHub mark: Simple Icons (CC0, public domain). The rest (mail, play, open, copy, check, file) are simple shapes drawn here; the "in" mark is drawn
 // here too (LinkedIn's logo was removed from Simple Icons at LinkedIn's request).
 import type { IconName } from './content'
 
@@ -53,6 +53,10 @@ defineProps<{ name: IconName }>()
         <path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1" />
       </template>
       <path v-else-if="name === 'check'" d="M5 12.5l4.5 4.5L19 7.5" />
+      <template v-else-if="name === 'file'">
+        <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
+        <path d="M14 3v5h5M9 13h6M9 17h6" />
+      </template>
     </g>
   </svg>
 </template>

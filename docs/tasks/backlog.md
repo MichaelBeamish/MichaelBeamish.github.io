@@ -13,7 +13,7 @@ Status: `todo` · `planned` · `in-progress` · `done` · `dropped`. One task at
 | 7 | Navigation: the nav stays at the top (frosted once scrolled, compact on phones); the name jumps to the top | done |
 | 8 | Contact and links: show the email with a Copy button; icons on every link | done |
 | 9 | A "Last updated" footer from the latest commit date, plus a "Source on GitHub" link | done |
-| 10 | Résumé link: "Résumé (PDF)" in the nav and Contact (needs a PDF from the owner without the phone number) | todo |
+| 10 | Résumé link: "Résumé (PDF)" in About and Contact (a phone-free PDF in `public/`); About wording matches the résumé | done |
 
 ### 1. Spike: the screen over Creature World — approved 2026-11-22
 Answer one question cheaply: **does the feel work?** A full-screen iframe of the live Creature World; a frosted,
