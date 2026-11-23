@@ -2,6 +2,22 @@
 
 Newest first. One entry per verified task or significant decision.
 
+## 2026-11-22 — Task #3 done: the portfolio content
+- The real portfolio on the screen: About (photo, the Microchip story, the career break said plainly, back and
+  building), Projects (Creature World with its own "Meet the residents" button; **"Before my first job · 2018–19"**:
+  Love Letter, Battleship, Backpack App, Satellite Tracker), Experience + Education, Contact (email, LinkedIn,
+  GitHub — **no phone number**, enforced by `content.test.ts`).
+- Structure: the words live in `src/content.ts` (data), the layout in `src/PortfolioPage.vue`; `App.vue` stays the
+  screen + world shell. The screen is now hidden with `v-show`, so coming back keeps scroll position, and focus
+  returns to whichever button lifted it. The tuning panel is a lazy dev-only import — gone from production.
+- Photo: 2.4 MB PNG → 25 KB WebP (ImageMagick, no new dependency), imported so Vite hashes its filename.
+- 2019 findings: the old live demos no longer run (blank / empty map) and the demo videos are private, so the cards
+  link to code only (task #4 adds the videos if the owner unlists them). The old thumbnails were stock photos and
+  game art, so they were not reused. `portfolio-2019` was made private (it had the old phone number and resume).
+- Verified: 10 tests, all five checks; Chrome driven over the DevTools Protocol at 1280 px and 375 px — tab order,
+  lift from the card, Escape, scroll + focus restored, tuning panel in dev only; every link checked (LinkedIn answers
+  bots with 999). Owner read and approved the copy.
+
 ## 2026-11-22 — Task #2 done: GitHub repo, CI and auto-deploy
 - **The 2019 portfolio** held the user-site name: renamed `MichaelBeamish/portfolio-2019` and archived (renaming
   ended its Pages site). Nothing deleted; its projects are wanted as a section in task #3.

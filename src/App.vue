@@ -2,17 +2,33 @@
 // The portfolio over the live Creature World (task #1 spike). While the screen is up, the world shows through but
 // can't be touched (the screen catches the pointer; the iframe is `inert` for keyboard and screen-reader users).
 // "Meet the residents" lifts it; "Back to portfolio" (top-right) brings it back — so does Escape.
-import { nextTick, onBeforeUnmount, onMounted, ref, useTemplateRef } from 'vue'
+// The screen is hidden (v-show), not removed, so coming back keeps your scroll position and focus.
+import {
+  defineAsyncComponent,
+  nextTick,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  useTemplateRef,
+} from 'vue'
+import PortfolioPage from './PortfolioPage.vue'
 import { CREATURE_WORLD_URL, SCREEN, screenStyle, type ScreenLook } from './screen'
-import TuningPanel from './TuningPanel.vue'
+
+// Dev only: `import.meta.env.DEV` is replaced by `false` in production builds, so the whole dynamic import is dead
+// code there and the tuning panel never reaches the bundle.
+const TuningPanel = import.meta.env.DEV
+  ? defineAsyncComponent(() => import('./TuningPanel.vue'))
+  : undefined
 
 const screenUp = ref(true)
 const look = ref<ScreenLook>({ blur: SCREEN.blur, tint: SCREEN.tint, saturate: SCREEN.saturate })
-const showTuning = import.meta.env.DEV
 const liftButton = useTemplateRef<HTMLButtonElement>('lift')
 const backButton = useTemplateRef<HTMLButtonElement>('back')
+/** The button that lifted the screen (nav or Creature World card) — focus goes back to it. */
+let liftedFrom: HTMLElement | null = null
 
 async function lift() {
+  liftedFrom = document.activeElement instanceof HTMLElement ? document.activeElement : null
   screenUp.value = false
   await nextTick()
   backButton.value?.focus() // keyboard users land on the way back
@@ -21,7 +37,7 @@ async function lift() {
 async function lower() {
   screenUp.value = true
   await nextTick()
-  liftButton.value?.focus()
+  ;(liftedFrom ?? liftButton.value)?.focus({ preventScroll: true })
 }
 
 function onKeyDown(event: KeyboardEvent) {
@@ -41,35 +57,18 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeyDown))
   />
 
   <Transition name="screen">
-    <div v-if="screenUp" class="screen" :style="screenStyle(look)">
+    <div v-show="screenUp" class="screen" :style="screenStyle(look)">
       <header class="nav">
         <span class="name">Michael Beamish</span>
         <nav aria-label="Main">
           <a href="#about">About</a>
           <a href="#projects">Projects</a>
+          <a href="#experience">Experience</a>
           <a href="#contact">Contact</a>
           <button ref="lift" type="button" class="meet" @click="lift">Meet the residents 🐙</button>
         </nav>
       </header>
-      <main class="content">
-        <h1>Hi, I'm Michael.</h1>
-        <p>
-          Placeholder text for the spike — the real portfolio comes later. Something is living
-          behind this page…
-        </p>
-        <section id="about">
-          <h2>About</h2>
-          <p>Coming soon.</p>
-        </section>
-        <section id="projects">
-          <h2>Projects</h2>
-          <p>Coming soon.</p>
-        </section>
-        <section id="contact">
-          <h2>Contact</h2>
-          <p>Coming soon.</p>
-        </section>
-      </main>
+      <PortfolioPage @lift="lift" />
     </div>
   </Transition>
 
@@ -79,7 +78,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeyDown))
     </button>
   </Transition>
 
-  <TuningPanel v-if="showTuning && screenUp" v-model="look" />
+  <TuningPanel v-if="TuningPanel && screenUp" v-model="look" />
 </template>
 
 <style>
@@ -126,8 +125,10 @@ body,
 
 .nav {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  gap: 12px 24px;
   padding: 20px 32px;
 }
 .name {
@@ -136,8 +137,9 @@ body,
 }
 .nav nav {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 22px;
+  gap: 10px 22px;
 }
 .nav a {
   color: inherit;
@@ -167,17 +169,6 @@ body,
   outline: 2px solid #ffe9b0;
   outline-offset: 2px;
 }
-.content {
-  max-width: 720px;
-  margin: 10vh auto 0;
-  padding: 0 32px 64px;
-  line-height: 1.6;
-}
-.content h1 {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  margin-bottom: 0.4em;
-}
-
 /* The way back: the only thing left of the portfolio while the creatures are out. */
 .back {
   position: fixed;
@@ -194,6 +185,12 @@ body,
 .back-enter-from,
 .back-leave-to {
   opacity: 0;
+}
+
+@media (max-width: 600px) {
+  .nav {
+    padding: 16px 20px;
+  }
 }
 
 /* Reduced motion: a plain, quick fade — no blur animation. */

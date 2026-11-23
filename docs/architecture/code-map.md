@@ -18,7 +18,10 @@
 | File | What it does | Exports |
 |---|---|---|
 | `src/main.ts` | Entry: mounts the Vue app | — |
-| `src/App.vue` | The page: the Creature World iframe, the screen with the portfolio, the way back; Escape and focus handling | — |
+| `src/App.vue` | The shell: the Creature World iframe, the screen (nav + `PortfolioPage`), the way back; Escape and focus handling; the dev-only tuning panel (lazy, never in production) | — |
+| `src/PortfolioPage.vue` | The portfolio itself: lays out `content.ts` (about, projects, experience, contact); emits `lift` from the Creature World card | — |
+| `src/content.ts` | Everything the site says, as data: profile, featured project, the 2018–19 projects, experience, education, contact | `Link`, `Project`, `Job`, `PROFILE`, `FEATURED`, `EARLY_PROJECTS_INTRO`, `EARLY_PROJECTS`, `EXPERIENCE`, `EDUCATION`, `CONTACT` |
+| `src/assets/profile.webp` | The profile photo (480 px WebP; imported, so Vite gives it a hashed filename) | — |
 | `src/screen.ts` | The screen's look as data (blur, tint, saturate) → CSS custom properties; where Creature World is | `CREATURE_WORLD_URL`, `ScreenLook`, `SCREEN`, `LIMITS`, `clampLook`, `screenStyle` |
 | `src/TuningPanel.vue` | Dev-only sliders to tune the screen's look (spike) | — |
 | `src/codeMap.test.ts` | Drift test for this map | — |
@@ -43,6 +46,12 @@
 | The tuning slider ranges | `LIMITS.blur` | `src/screen.ts` |
 
 ## Common changes (recipes)
+
+**Change any text, link or project on the site:** edit `src/content.ts` (layout lives in `src/PortfolioPage.vue`).
+`src/content.test.ts` checks links are `https:`/`mailto:` and that no phone number slips in.
+
+**Replace the profile photo:** resize it first (no new dependency — ImageMagick:
+`magick photo.png -resize 480x480 -strip -quality 80 src/assets/profile.webp`), then keep the same filename.
 
 **Point at a different Creature World (e.g. a local one):** set `VITE_CREATURE_WORLD_URL` in a `.env.local` file
 (e.g. `VITE_CREATURE_WORLD_URL=http://localhost:5173/`) and run `pnpm dev -- --port 5174`.
