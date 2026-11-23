@@ -3,6 +3,10 @@
  * words never touches the layout — and `content.test.ts` can check every link and keep personal details out.
  * Sources: the owner's resume and the 2019 portfolio (the archived, private `portfolio-2019` repo).
  */
+import backpackShot from './assets/2019/backpack.webp'
+import battleshipShot from './assets/2019/battleship.webp'
+import loveLetterShot from './assets/2019/love-letter.webp'
+import satelliteShot from './assets/2019/satellite.webp'
 import profilePhoto from './assets/profile.webp'
 
 export interface Link {
@@ -16,6 +20,9 @@ export interface Project {
   description: string
   stack: string[]
   links: Link[]
+  /** A screenshot of the app (imported, so Vite hashes it) — always with `imageAlt`. */
+  image?: string
+  imageAlt?: string
 }
 
 export interface Job {
@@ -60,7 +67,11 @@ export const EARLY_PROJECTS_INTRO =
   'Built at Galvanize in 2018–19, before my first software job — and long before AI pair programmers. ' +
   "Rough around the edges, but I'm still proud of them."
 
-/** The 2018–19 Galvanize projects (from the 2019 portfolio). Their old demos no longer run, so: code only. */
+/**
+ * The 2018–19 Galvanize projects (from the 2019 portfolio). Their old live demos no longer run, so each links to the
+ * owner's 2019 demo video (unlisted on YouTube) and the code. Screenshots are the videos' thumbnails (a friend's name
+ * blurred on Love Letter's).
+ */
 export const EARLY_PROJECTS: Project[] = [
   {
     title: 'Love Letter',
@@ -68,27 +79,51 @@ export const EARLY_PROJECTS: Project[] = [
       'My favorite. On our breaks at Galvanize we played the card game Love Letter, so I built it so we could ' +
       'play online.',
     stack: ['React', 'Redux', 'Firebase'],
-    links: [{ label: 'Code', href: 'https://github.com/MichaelBeamish/react-love-letter' }],
+    links: [
+      { label: 'Watch the demo (4:37)', href: 'https://youtu.be/pt1HOM-q53g' },
+      { label: 'Code', href: 'https://github.com/MichaelBeamish/react-love-letter' },
+    ],
+    image: loveLetterShot,
+    imageAlt:
+      "Love Letter's Host Private Game screen: a game name, the current players and a list to invite friends",
   },
   {
     title: 'Battleship',
     description: 'My third-quarter project at Galvanize: the classic game, two players, online.',
     stack: ['React', 'Redux', 'Firebase', 'Materialize'],
-    links: [{ label: 'Code', href: 'https://github.com/MichaelBeamish/react-battleship' }],
+    links: [
+      { label: 'Watch the demo (5:08)', href: 'https://youtu.be/XMg4Y0VVmyI' },
+      { label: 'Code', href: 'https://github.com/MichaelBeamish/react-battleship' },
+    ],
+    image: battleshipShot,
+    imageAlt:
+      "Battleship's Set Up Your Board screen: a grid with ships being placed and the ships left to place",
   },
   {
     title: 'Backpack App',
     description:
       'Our second-quarter group project: an app that keeps track of who is bringing what on a camping trip.',
     stack: ['Node.js', 'Express', 'PostgreSQL', 'Bootstrap'],
-    links: [{ label: 'Code', href: 'https://github.com/MichaelBeamish/Backpack-project' }],
+    links: [
+      { label: 'Watch the demo (6:32)', href: 'https://youtu.be/ZEuZAw5rHDY' },
+      { label: 'Code', href: 'https://github.com/MichaelBeamish/Backpack-project' },
+    ],
+    image: backpackShot,
+    imageAlt:
+      'The Backpack app: a camping checklist (clothes, food, headlamp, sleeping bag) over a mountain lake photo',
   },
   {
     title: 'Satellite Tracker',
     description:
       'My first project at Galvanize: live satellite positions on a map, from several public APIs.',
     stack: ['Node.js', 'Axios', 'Bootstrap'],
-    links: [{ label: 'Code', href: 'https://github.com/MichaelBeamish/q1-project' }],
+    links: [
+      { label: 'Watch the demo (3:31)', href: 'https://youtu.be/HotoO9cmhHY' },
+      { label: 'Code', href: 'https://github.com/MichaelBeamish/q1-project' },
+    ],
+    image: satelliteShot,
+    imageAlt:
+      'Satellite Tracker: buttons for the ISS and other satellites above a world map showing where one is now',
   },
 ]
 

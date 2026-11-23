@@ -2,6 +2,15 @@
 
 Newest first. One entry per verified task or significant decision.
 
+## 2026-11-22 — Task #4 done: 2019 demo videos and screenshots
+- The owner set the four 2019 demo videos to Unlisted (and renamed the channel). Each 2018–19 card now links to its
+  video ("Watch the demo (m:ss)") and shows a screenshot of the app — the video's own thumbnail, 640 px WebP
+  (6–45 KB), stored in `src/assets/2019/` rather than loaded from YouTube (no third-party requests, can't break).
+- Linked, not embedded: four YouTube players would load a lot of third-party code on every visit.
+- A friend's name visible in the Love Letter screenshot is blurred (in four spots); the video itself still shows it.
+- Verified: 11 tests (new: every screenshot has alt text), all five checks; Chrome at 1280 px and 375 px — images
+  load lazily into reserved 16:9 frames; all four video links resolve.
+
 ## 2026-11-22 — Task #3 done: the portfolio content
 - The real portfolio on the screen: About (photo, the Microchip story, the career break said plainly, back and
   building), Projects (Creature World with its own "Meet the residents" button; **"Before my first job · 2018–19"**:

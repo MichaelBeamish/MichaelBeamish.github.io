@@ -56,6 +56,15 @@ const isExternal = (href: string) => href.startsWith('https://')
       <p class="early-intro">{{ EARLY_PROJECTS_INTRO }}</p>
       <div class="grid">
         <article v-for="project in EARLY_PROJECTS" :key="project.title" class="card">
+          <img
+            v-if="project.image"
+            :src="project.image"
+            :alt="project.imageAlt"
+            class="shot"
+            width="640"
+            height="360"
+            loading="lazy"
+          />
           <h4>{{ project.title }}</h4>
           <p>{{ project.description }}</p>
           <ul class="stack" aria-label="Built with">
@@ -163,6 +172,16 @@ h2 {
 }
 .card p {
   margin: 0 0 0.8em;
+}
+/* A card's screenshot runs edge to edge; width/height reserve its space so nothing jumps when it loads. */
+.shot {
+  display: block;
+  width: calc(100% + 40px);
+  height: auto;
+  aspect-ratio: 16 / 9;
+  margin: -18px -20px 14px;
+  border-radius: 13px 13px 0 0;
+  object-fit: cover;
 }
 .featured {
   border-color: rgba(255, 233, 176, 0.45);

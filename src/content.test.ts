@@ -19,6 +19,13 @@ describe('portfolio content', () => {
     for (const link of allLinks) expect(link.href, link.label).toMatch(/^(https:\/\/|mailto:)/)
   })
 
+  it('gives every project screenshot alt text', () => {
+    for (const p of projects.filter((p) => p.image)) {
+      expect(p.imageAlt?.length ?? 0, p.title).toBeGreaterThan(10)
+    }
+    expect(EARLY_PROJECTS.every((p) => p.image)).toBe(true)
+  })
+
   it('has a photo with alt text', () => {
     expect(PROFILE.photo).toBeTruthy()
     expect(PROFILE.photoAlt.length).toBeGreaterThan(10)
