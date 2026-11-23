@@ -18,8 +18,8 @@ export interface ScreenLook {
 
 /** The starting look — tuned in the spike with the dev-only panel. */
 export const SCREEN: ScreenLook & { liftSeconds: number } = {
-  blur: 8,
-  tint: 0.55,
+  blur: 17.5,
+  tint: 0.77,
   saturate: 0.85,
   /** How long lifting (or lowering) the screen takes (s). */
   liftSeconds: 0.7,
