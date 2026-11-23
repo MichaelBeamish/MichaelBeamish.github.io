@@ -11,6 +11,7 @@ import {
   EXPERIENCE,
   FEATURED,
   PROFILE,
+  RESUME,
   SITE_SOURCE,
 } from './content'
 import { formatLastUpdated } from './lastUpdated'
@@ -63,6 +64,12 @@ onBeforeUnmount(() => clearTimeout(resetTimer))
         <h1 id="about-title">{{ PROFILE.greeting }}</h1>
         <p class="role">{{ PROFILE.role }}</p>
         <p v-for="(paragraph, i) in PROFILE.about" :key="i">{{ paragraph }}</p>
+        <p class="links">
+          <a :href="RESUME.href" target="_blank" rel="noopener">
+            <LinkIcon :name="RESUME.icon" />
+            {{ RESUME.label }}<span class="sr-only"> (opens in a new tab)</span>
+          </a>
+        </p>
       </div>
     </section>
 
@@ -173,7 +180,7 @@ onBeforeUnmount(() => clearTimeout(resetTimer))
       </div>
       <div class="links">
         <a
-          v-for="link in CONTACT"
+          v-for="link in [...CONTACT, RESUME]"
           :key="link.href"
           :href="link.href"
           target="_blank"

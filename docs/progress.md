@@ -2,6 +2,17 @@
 
 Newest first. One entry per verified task or significant decision.
 
+## 2026-11-23 — Task #10 done: the résumé on the site
+- "Résumé (PDF)" (new `file` icon) in About and Contact, linking `/resume.pdf` — a **phone-free** public copy in
+  `public/`, served as-is at a fixed address. The private copy with the phone number stays in `docs/` (git-ignored).
+- Before publishing, the PDF was read in full and its raw bytes checked: no phone number in the text, links,
+  metadata or decompressed streams (three "480" matches were PDF index offsets and a drawing coordinate); its six
+  links (email, LinkedIn, portfolio, GitHub, The Ink Tank demo and code) are correct.
+- About now matches the résumé: "I'm open to frontend and full-stack roles — remote or relocation."
+- New test: every site-relative link must point at a real file in `public/` (it failed until the PDF was added).
+- Verified: 17 tests; all five checks; `/resume.pdf` served as `application/pdf`; Chrome at 1280 and 375 px — both
+  links open in a new tab, icon hidden from screen readers, accessible name "Résumé (PDF) (opens in a new tab)".
+
 ## 2026-11-23 — Task #9 done: "Last updated" footer and a source link
 - A footer under the page: "Last updated <date>" and "Source on GitHub" (this repo). The date is the latest
   commit's: the deploy workflow records it (`git log -1 --format=%cI`) as `VITE_LAST_UPDATED`, Vite exposes it as

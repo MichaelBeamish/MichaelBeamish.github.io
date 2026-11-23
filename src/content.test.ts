@@ -7,11 +7,12 @@ import {
   FEATURED,
   ICON_NAMES,
   PROFILE,
+  RESUME,
   SITE_SOURCE,
 } from './content'
 
 const projects = [FEATURED, ...EARLY_PROJECTS]
-const allLinks = [...projects.flatMap((p) => p.links), ...CONTACT, SITE_SOURCE]
+const allLinks = [...projects.flatMap((p) => p.links), ...CONTACT, RESUME, SITE_SOURCE]
 
 describe('portfolio content', () => {
   it('gives every project a title, a description, its stack and at least one link', () => {
@@ -31,8 +32,18 @@ describe('portfolio content', () => {
     expect(EMAIL).toMatch(/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/)
   })
 
-  it('only links to https:// or mailto: addresses', () => {
-    for (const link of allLinks) expect(link.href, link.label).toMatch(/^(https:\/\/|mailto:)/)
+  it('only links to https://, mailto: or this site (/...)', () => {
+    for (const link of allLinks) {
+      expect(link.href, link.label).toMatch(/^(https:\/\/|mailto:|\/[^/])/)
+    }
+  })
+
+  // Site-relative links (e.g. /resume.pdf) are files in public/, which Vite serves as-is: they must exist.
+  it('points every site-relative link at a file that exists in public/', () => {
+    const publicFiles = Object.keys(import.meta.glob('/public/**/*'))
+    for (const link of allLinks.filter((l) => l.href.startsWith('/'))) {
+      expect(publicFiles, link.label).toContain('/public' + link.href)
+    }
   })
 
   it('gives every project screenshot alt text', () => {
