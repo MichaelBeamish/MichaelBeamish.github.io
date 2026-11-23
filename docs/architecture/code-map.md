@@ -29,6 +29,8 @@
 |---|---|
 | `vite.config.ts` | Vite + Vitest config (`base` `/`: a GitHub user site is served from the domain root) |
 | `.github/workflows/ci.yml` | CI on every PR and push to `main`: format, lint, typecheck, test, build |
+| `.github/workflows/deploy.yml` | Deploy on every push to `main`: the same checks, then publish `dist/` to GitHub Pages (ADR 0002) |
+| `.gitignore` | Also keeps the owner's resume PDF (`docs/*resume*.pdf`) out of the public repo |
 
 ## To change X, edit Y
 

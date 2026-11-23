@@ -27,3 +27,6 @@ pnpm-debug.log*
 Thumbs.db
 desktop.ini
 *.local
+
+# My resume (source for the portfolio content; has personal contact details — never commit it)
+docs/*resume*.pdf

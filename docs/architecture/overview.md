@@ -17,6 +17,11 @@ The *why*. For the *where*, see the [code map](code-map.md).
   way back. The creatures become fully interactive.
 - **"← Back to portfolio"** (or **Escape**) brings it back and returns focus to the nav button.
 
+## Deploy
+This repo is the GitHub *user site*: every merge to `main` is checked and published to
+`https://michaelbeamish.github.io/` by `.github/workflows/deploy.yml` (ADR 0002). Creature World deploys itself to
+`/creature-world/` on the same origin.
+
 ## Spike tooling
 A dev-only `TuningPanel` (shown only under `pnpm dev`) has sliders for the screen's look and prints the values to
 copy into `SCREEN`.
