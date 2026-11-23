@@ -52,7 +52,7 @@ export interface Job {
 export const PROFILE = {
   name: 'Michael Beamish',
   greeting: "Hi, I'm Mike.",
-  role: 'Frontend developer · Vue.js · JavaScript & TypeScript',
+  role: 'Software Engineer — Frontend · Vue.js · JavaScript & TypeScript',
   photo: profilePhoto,
   photoAlt: 'Mike Beamish smiling outdoors, with pine trees and mountains behind him',
   about: [

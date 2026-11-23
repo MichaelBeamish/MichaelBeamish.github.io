@@ -2,6 +2,17 @@
 
 Newest first. One entry per verified task or significant decision.
 
+## 2026-11-23 — Task #11 done: link previews, and "Software Engineer — Frontend"
+- Shared links now show a large preview card: Open Graph + `twitter:card` tags in the static `index.html` (preview
+  bots don't run JS), `og:image` → `public/og-image.jpg` (1200×630, 70 KB): a mirrored frame of The Ink Tank with
+  the owner's name in Fredoka. Its source is kept in `docs/og-card/` (re-rendering it differs from the published
+  image only by JPEG noise). Canonical URL added.
+- Positioning (owner's decision): **"Software Engineer — Frontend"** — the tab title, preview and About tagline,
+  matching the résumé's "Software Engineer" headline; full-stack once project #2 earns it.
+- New test: `og:image` is an absolute URL on this site pointing at a real file in `public/` (proven by removing the
+  image: it failed).
+- Verified: 18 tests; all five checks; the build carries all 9 `og:` tags and the image.
+
 ## 2026-11-23 — Task #10 done: the résumé on the site
 - "Résumé (PDF)" (new `file` icon) in About and Contact, linking `/resume.pdf` — a **phone-free** public copy in
   `public/`, served as-is at a fixed address. The private copy with the phone number stays in `docs/` (git-ignored).
