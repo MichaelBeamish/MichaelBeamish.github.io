@@ -2,6 +2,22 @@
 
 Newest first. One entry per verified task or significant decision.
 
+## 2026-11-23 — Task #7 done: the nav stays at the top
+- The nav is `position: sticky` inside the scrolling `.screen`: see-through at the top, then a solid bar in the
+  screen's color fades in over the first 80 px (scroll-driven animation, `animation-timeline: scroll()`; browsers
+  without it get the bar from the start). "Michael Beamish" links back to the top.
+- Phones: two compact rows (name + "Meet the residents", then the links) — 81 px instead of ~120 px. "Meet the
+  residents" moved out of `<nav>` (it's a button, not navigation).
+- `scroll-padding-top` on `.screen` keeps anchor jumps and keyboard focus below the nav (WCAG 2.4.11, Focus Not
+  Obscured); it replaces the sections' `scroll-margin-top`.
+- **Learned:** a `backdrop-filter` nested inside an element that already has one (our frosted `.screen`) has no
+  backdrop to blur — the computed style says `blur(12px)` but nothing blurs. And a 94%-opaque bar still lets white
+  text ghost through; the bar is fully opaque.
+- Verified: all five checks; Chrome over CDP at 1280 and 375 px — nav pinned at top while scrolled, every nav jump
+  lands its heading 13–42 px below the nav, the name scrolls to 0, Shift+Tab never leaves focus under the nav; a
+  forced solid-red bar confirmed the nav paints above the content; lift/Escape/focus return unchanged.
+- Backlog: tasks #8 (contact & links) and #9 ("Last updated" footer) added.
+
 ## 2026-11-22 — Task #6 done: the look
 - **Fredoka** for headings (self-hosted 30 KB Latin subset + its OFL license; `font-display: swap`); body text stays
   the system font.

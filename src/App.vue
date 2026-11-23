@@ -58,17 +58,18 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeyDown))
 
   <Transition name="screen">
     <div v-show="screenUp" class="screen" :style="screenStyle(look)">
+      <span id="top"></span>
       <header class="nav">
-        <span class="name display">Michael Beamish</span>
+        <a href="#top" class="name display">Michael Beamish</a>
         <nav aria-label="Main">
           <a href="#about">About</a>
           <a href="#projects">Projects</a>
           <a href="#experience">Experience</a>
           <a href="#contact">Contact</a>
-          <button ref="lift" type="button" class="meet" @click="lift">
-            Meet the residents <span class="octo" aria-hidden="true">🐙</span>
-          </button>
         </nav>
+        <button ref="lift" type="button" class="meet" @click="lift">
+          Meet the residents <span class="octo" aria-hidden="true">🐙</span>
+        </button>
       </header>
       <PortfolioPage @lift="lift" />
     </div>
@@ -163,6 +164,8 @@ button:focus-visible .octo {
   color: #eef3f7;
   background: rgba(8, 14, 26, var(--screen-tint));
   backdrop-filter: blur(var(--screen-blur)) saturate(var(--screen-saturate));
+  /* Anchor jumps and keyboard focus stop below the sticky nav, never under it (WCAG 2.4.11). */
+  scroll-padding-top: 108px;
 }
 .screen-enter-active,
 .screen-leave-active {
@@ -176,17 +179,50 @@ button:focus-visible .octo {
   backdrop-filter: blur(0) saturate(1);
 }
 
+/* The nav stays at the top of the screen while you scroll: see-through at the very top, then a solid bar in the
+   screen's own color, so text scrolling under it never ghosts through. (No backdrop-filter: inside the already
+   frosted .screen, a nested one has no backdrop to blur — a known browser limitation.) */
 .nav {
+  position: sticky;
+  top: 0;
+  z-index: 1;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
   align-items: center;
   gap: 12px 24px;
-  padding: 20px 32px;
+  padding: 18px 32px;
+  border-bottom: 1px solid transparent;
 }
-.name {
+/* Tied to how far the screen has scrolled (scroll-driven animation): over the first 80 px the bar fades in.
+   Browsers without support get the bar from the start. */
+@supports (animation-timeline: scroll()) {
+  .nav {
+    animation: nav-frost linear both;
+    animation-timeline: scroll();
+    animation-range: 0 80px;
+  }
+}
+@supports not (animation-timeline: scroll()) {
+  .nav {
+    background-color: rgb(9, 18, 31);
+    border-bottom-color: rgba(255, 255, 255, 0.12);
+  }
+}
+@keyframes nav-frost {
+  from {
+    background-color: rgba(9, 18, 31, 0);
+    border-bottom-color: transparent;
+  }
+  to {
+    background-color: rgb(9, 18, 31);
+    border-bottom-color: rgba(255, 255, 255, 0.12);
+  }
+}
+.nav .name {
+  margin-right: auto;
   font-weight: 700;
   letter-spacing: 0.02em;
+  opacity: 1;
+  text-decoration: none;
 }
 .nav nav {
   display: flex;
@@ -240,9 +276,32 @@ button:focus-visible .octo {
   opacity: 0;
 }
 
+/* Phones: two compact rows — name + "Meet the residents", then the section links. */
 @media (max-width: 600px) {
+  .screen {
+    scroll-padding-top: 112px;
+  }
   .nav {
-    padding: 16px 20px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'name meet'
+      'links links';
+    gap: 8px 12px;
+    padding: 10px 16px 8px;
+  }
+  .nav .name {
+    grid-area: name;
+  }
+  .nav nav {
+    grid-area: links;
+    gap: 4px 18px;
+    font-size: 0.92rem;
+  }
+  .nav .meet {
+    grid-area: meet;
+    padding: 6px 12px;
+    font-size: 0.92rem;
   }
 }
 
