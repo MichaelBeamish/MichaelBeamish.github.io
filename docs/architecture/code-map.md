@@ -22,6 +22,7 @@
 | `src/PortfolioPage.vue` | The portfolio itself: lays out `content.ts` (about, projects, experience, contact); emits `lift` from the Creature World card | — |
 | `src/content.ts` | Everything the site says, as data: profile, featured project, the 2018–19 projects, experience, education, contact | `Link`, `Project`, `Job`, `PROFILE`, `FEATURED`, `EARLY_PROJECTS_INTRO`, `EARLY_PROJECTS`, `EXPERIENCE`, `EDUCATION`, `CONTACT` |
 | `src/assets/profile.webp` | The profile photo (480 px WebP; imported, so Vite gives it a hashed filename) | — |
+| `src/assets/2019/` | Screenshots for the 2018–19 project cards (the demo videos' thumbnails, 640 px WebP; a friend's name blurred on `love-letter.webp`) | — |
 | `src/screen.ts` | The screen's look as data (blur, tint, saturate) → CSS custom properties; where Creature World is | `CREATURE_WORLD_URL`, `ScreenLook`, `SCREEN`, `LIMITS`, `clampLook`, `screenStyle` |
 | `src/TuningPanel.vue` | Dev-only sliders to tune the screen's look (spike) | — |
 | `src/codeMap.test.ts` | Drift test for this map | — |

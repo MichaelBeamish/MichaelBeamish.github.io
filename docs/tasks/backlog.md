@@ -7,7 +7,7 @@ Status: `todo` · `planned` · `in-progress` · `done` · `dropped`. One task at
 | 1 | Spike: the screen over Creature World | done |
 | 2 | GitHub repo, CI and auto-deploy to michaelbeamish.github.io | done |
 | 3 | Portfolio content: about, projects, contact | done |
-| 4 | 2019 demo videos: "Watch it" links on the 2018–19 cards (after the owner sets the videos to Unlisted) | todo |
+| 4 | 2019 demo videos: "Watch it" links on the 2018–19 cards (after the owner sets the videos to Unlisted) | done |
 
 ### 1. Spike: the screen over Creature World — approved 2026-11-22
 Answer one question cheaply: **does the feel work?** A full-screen iframe of the live Creature World; a frosted,
