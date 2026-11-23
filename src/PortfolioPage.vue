@@ -39,7 +39,9 @@ const isExternal = (href: string) => href.startsWith('https://')
           <li v-for="tech in FEATURED.stack" :key="tech">{{ tech }}</li>
         </ul>
         <div class="links">
-          <button type="button" class="meet" @click="$emit('lift')">Meet the residents 🐙</button>
+          <button type="button" class="meet" @click="$emit('lift')">
+            Meet the residents <span class="octo" aria-hidden="true">🐙</span>
+          </button>
           <a
             v-for="link in FEATURED.links"
             :key="link.href"
@@ -56,7 +58,7 @@ const isExternal = (href: string) => href.startsWith('https://')
       <!-- Native disclosure: closed by default, keyboard + screen-reader friendly, no JS state. -->
       <details class="early">
         <summary>
-          <span class="early-title">Before my first software job</span>
+          <span class="early-title display">Before my first software job</span>
           <span class="early-sub">
             Galvanize student projects, 2018–19 ·
             <span class="when-closed">Show {{ EARLY_PROJECTS.length }} projects</span>
@@ -166,15 +168,40 @@ h1 {
   color: #ffe9b0;
 }
 h2 {
-  font-size: 1.6rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  padding-bottom: 0.3em;
+  position: relative;
+  font-size: 1.7rem;
+  padding-bottom: 0.35em;
+}
+/* A glowing underline that fades out, like light from the shells on the sea floor. */
+h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #8ee6ff, rgba(255, 233, 176, 0.55) 45%, transparent);
+  box-shadow: 0 0 10px rgba(120, 225, 255, 0.45);
 }
 .card {
   padding: 18px 20px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.06);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+/* Bioluminescence: a card glows softly (and lifts a touch) on hover — and on keyboard focus inside it. */
+.card:hover,
+.card:focus-within {
+  transform: translateY(-2px);
+  border-color: rgba(142, 230, 255, 0.5);
+  box-shadow:
+    0 0 0 1px rgba(142, 230, 255, 0.15),
+    0 8px 28px rgba(80, 200, 255, 0.2);
 }
 .card h3,
 .card h4 {
@@ -196,6 +223,29 @@ h2 {
 }
 .featured {
   border-color: rgba(255, 233, 176, 0.45);
+  box-shadow: 0 0 24px rgba(255, 233, 176, 0.08);
+}
+
+/* Sections rise gently into view as you scroll — pure CSS, tied to scroll position (scroll-driven animations).
+   Browsers without support, and anyone who prefers reduced motion, just see the content. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .page > section:not(.about) {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 /* The 2018–19 group: a clearly separate, collapsed section. */
 .early {
@@ -255,8 +305,13 @@ h2 {
   color: #ffe9b0;
 }
 @media (prefers-reduced-motion: reduce) {
-  .early summary::before {
+  .early summary::before,
+  .card {
     transition: none;
+  }
+  .card:hover,
+  .card:focus-within {
+    transform: none; /* keep the glow, drop the movement */
   }
 }
 .grid {

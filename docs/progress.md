@@ -2,6 +2,20 @@
 
 Newest first. One entry per verified task or significant decision.
 
+## 2026-11-22 — Task #6 done: the look
+- **Fredoka** for headings (self-hosted 30 KB Latin subset + its OFL license; `font-display: swap`); body text stays
+  the system font.
+- **Bioluminescent touches:** cards lift 2 px and glow cyan on hover *and* keyboard focus (`:focus-within`); section
+  headings get a glowing cyan-to-gold underline; the featured card has a faint warm glow.
+- **Gentle reveal:** sections rise into view with a pure-CSS scroll-driven animation (`animation-timeline: view()`),
+  inside `@supports` — progressive enhancement, no JavaScript.
+- **The 🐙 wiggles** on hover/focus of either "Meet the residents" button; it's `aria-hidden`, so screen readers say
+  "Meet the residents".
+- The reading panel was dropped: the owner's darker screen look (task #5) already fixed readability.
+- Verified: all five checks; Chrome over CDP, with and without emulated "reduce motion": font applied to headings
+  only; mid-reveal opacity 0.14 → none under reduce; hover lift + glow → glow only under reduce; wiggle → none under
+  reduce; accessible button names.
+
 ## 2026-11-22 — Task #5 done: The Ink Tank, the Grumpy challenge, the 2018–19 section collapsed
 - On the portfolio, Creature World is now **The Ink Tank** (owner's pick): the card, the About text, the iframe's
   title and the README. The project, its repo and URL keep their name; its own tab title still says "Creature World"
