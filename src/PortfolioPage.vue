@@ -144,7 +144,6 @@ const isExternal = (href: string) => href.startsWith('https://')
 }
 section {
   margin-top: 64px;
-  scroll-margin-top: 24px;
 }
 .about {
   display: flex;

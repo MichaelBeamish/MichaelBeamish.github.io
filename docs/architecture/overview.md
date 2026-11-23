@@ -25,6 +25,8 @@ This repo is the GitHub *user site*: every merge to `main` is checked and publis
 `/creature-world/` on the same origin.
 
 ## Look
+The nav sticks to the top of the screen; a scroll-driven animation (`animation-timeline: scroll()`) fades in its
+solid bar over the first 80 px. `.screen`'s `scroll-padding-top` keeps anchor jumps and keyboard focus below it.
 Headings use Fredoka (self-hosted, `font-display: swap`); body text is the system font. Cards glow softly on hover and
 keyboard focus (`:focus-within`); sections rise into view with a CSS scroll-driven animation (`animation-timeline:
 view()`, inside `@supports`). Everything that moves stops under "reduce motion".
