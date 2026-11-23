@@ -24,7 +24,7 @@ const screenUp = ref(true)
 const look = ref<ScreenLook>({ blur: SCREEN.blur, tint: SCREEN.tint, saturate: SCREEN.saturate })
 const liftButton = useTemplateRef<HTMLButtonElement>('lift')
 const backButton = useTemplateRef<HTMLButtonElement>('back')
-/** The button that lifted the screen (nav or Creature World card) — focus goes back to it. */
+/** The button that lifted the screen (nav or The Ink Tank card) — focus goes back to it. */
 let liftedFrom: HTMLElement | null = null
 
 async function lift() {
@@ -51,7 +51,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeyDown))
   <iframe
     class="world"
     :src="CREATURE_WORLD_URL"
-    title="Creature World — a living tide pool of curious creatures"
+    title="The Ink Tank — a living tide pool of curious creatures"
     :inert="screenUp || undefined"
     :tabindex="screenUp ? -1 : 0"
   />

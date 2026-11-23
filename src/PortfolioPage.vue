@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // The portfolio itself (task #3): lays out `content.ts`. It knows nothing about the screen or the world behind it —
-// it only asks App to lift the screen ("lift"), from the Creature World card.
+// it only asks App to lift the screen ("lift"), from The Ink Tank card.
 import {
   CONTACT,
   EARLY_PROJECTS,
@@ -34,6 +34,7 @@ const isExternal = (href: string) => href.startsWith('https://')
       <article class="card featured" aria-labelledby="featured-title">
         <h3 id="featured-title">{{ FEATURED.title }}</h3>
         <p>{{ FEATURED.description }}</p>
+        <p v-if="FEATURED.challenge" class="challenge">{{ FEATURED.challenge }}</p>
         <ul class="stack" aria-label="Built with">
           <li v-for="tech in FEATURED.stack" :key="tech">{{ tech }}</li>
         </ul>
@@ -52,38 +53,48 @@ const isExternal = (href: string) => href.startsWith('https://')
         </div>
       </article>
 
-      <h3 class="early-title">Before my first job · 2018–19</h3>
-      <p class="early-intro">{{ EARLY_PROJECTS_INTRO }}</p>
-      <div class="grid">
-        <article v-for="project in EARLY_PROJECTS" :key="project.title" class="card">
-          <img
-            v-if="project.image"
-            :src="project.image"
-            :alt="project.imageAlt"
-            class="shot"
-            width="640"
-            height="360"
-            loading="lazy"
-          />
-          <h4>{{ project.title }}</h4>
-          <p>{{ project.description }}</p>
-          <ul class="stack" aria-label="Built with">
-            <li v-for="tech in project.stack" :key="tech">{{ tech }}</li>
-          </ul>
-          <div class="links">
-            <a
-              v-for="link in project.links"
-              :key="link.href"
-              :href="link.href"
-              target="_blank"
-              rel="noopener"
-            >
-              {{ link.label
-              }}<span class="sr-only"> — {{ project.title }} (opens in a new tab)</span>
-            </a>
-          </div>
-        </article>
-      </div>
+      <!-- Native disclosure: closed by default, keyboard + screen-reader friendly, no JS state. -->
+      <details class="early">
+        <summary>
+          <span class="early-title">Before my first software job</span>
+          <span class="early-sub">
+            Galvanize student projects, 2018–19 ·
+            <span class="when-closed">Show {{ EARLY_PROJECTS.length }} projects</span>
+            <span class="when-open">Hide</span>
+          </span>
+        </summary>
+        <p class="early-intro">{{ EARLY_PROJECTS_INTRO }}</p>
+        <div class="grid">
+          <article v-for="project in EARLY_PROJECTS" :key="project.title" class="card">
+            <img
+              v-if="project.image"
+              :src="project.image"
+              :alt="project.imageAlt"
+              class="shot"
+              width="640"
+              height="360"
+              loading="lazy"
+            />
+            <h4>{{ project.title }}</h4>
+            <p>{{ project.description }}</p>
+            <ul class="stack" aria-label="Built with">
+              <li v-for="tech in project.stack" :key="tech">{{ tech }}</li>
+            </ul>
+            <div class="links">
+              <a
+                v-for="link in project.links"
+                :key="link.href"
+                :href="link.href"
+                target="_blank"
+                rel="noopener"
+              >
+                {{ link.label
+                }}<span class="sr-only"> — {{ project.title }} (opens in a new tab)</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </details>
     </section>
 
     <section id="experience" aria-labelledby="experience-title">
@@ -186,12 +197,67 @@ h2 {
 .featured {
   border-color: rgba(255, 233, 176, 0.45);
 }
+/* The 2018–19 group: a clearly separate, collapsed section. */
+.early {
+  margin-top: 40px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.25);
+  padding-top: 16px;
+}
+.early summary {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 10px;
+  align-items: baseline;
+  cursor: pointer;
+  list-style: none; /* our own chevron instead of the default triangle */
+  border-radius: 8px;
+}
+.early summary::-webkit-details-marker {
+  display: none;
+}
+.early summary::before {
+  content: '▸';
+  grid-row: span 2;
+  color: #ffe9b0;
+  transition: transform 0.2s ease;
+}
+.early[open] summary::before {
+  transform: rotate(90deg);
+}
+.early summary:focus-visible {
+  outline: 2px solid #ffe9b0;
+  outline-offset: 4px;
+}
 .early-title {
-  margin: 40px 0 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+.early-sub {
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+.when-closed,
+.when-open {
+  color: #ffe9b0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.early[open] .when-closed,
+.early:not([open]) .when-open {
+  display: none;
 }
 .early-intro {
-  margin-top: 0.3em;
+  margin: 14px 0 16px;
   opacity: 0.9;
+}
+.challenge {
+  font-weight: 600;
+  color: #ffe9b0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .early summary::before {
+    transition: none;
+  }
 }
 .grid {
   display: grid;

@@ -2,6 +2,19 @@
 
 Newest first. One entry per verified task or significant decision.
 
+## 2026-11-22 — Task #5 done: The Ink Tank, the Grumpy challenge, the 2018–19 section collapsed
+- On the portfolio, Creature World is now **The Ink Tank** (owner's pick): the card, the About text, the iframe's
+  title and the README. The project, its repo and URL keep their name; its own tab title still says "Creature World"
+  (that would change in its repo, not here — ADR 0001).
+- The card invites: "Challenge: Cheer up the grumpy one. (They don't love being shaken.)" — it's real: the rose
+  turns the Grumpy into a Friendly (`cheerUp.ts` in Creature World). "Play fetch" is gone (you don't play it with them).
+- **New screen look** (owner, for readability): `SCREEN` = blur 17.5, tint 0.77, saturate 0.85 (was 8 / 0.55 / 0.85).
+- The 2018–19 projects sit in one native `<details>`, **closed by default**: "Before my first software job ·
+  Galvanize student projects, 2018–19 · Show 4 projects".
+- "I'd consider relocating" instead of "happy to relocate".
+- Verified: all five checks; Chrome at 1280 px and 375 px — closed on load, Enter opens it, Show/Hide swaps, focus
+  ring visible; lift and return unchanged.
+
 ## 2026-11-22 — Task #4 done: 2019 demo videos and screenshots
 - The owner set the four 2019 demo videos to Unlisted (and renamed the channel). Each 2018–19 card now links to its
   video ("Watch the demo (m:ss)") and shows a screenshot of the app — the video's own thumbnail, 640 px WebP

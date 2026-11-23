@@ -1,7 +1,7 @@
 # Michael Beamish — portfolio
 
 My portfolio site — with a living secret behind it. The page sits on a frosted screen in front of
-[Creature World](https://github.com/MichaelBeamish/creature-world), a tide pool of curious, furry creatures. Lift the
+**The Ink Tank** ([Creature World](https://github.com/MichaelBeamish/creature-world)), a tide pool of curious, furry creatures. Lift the
 screen ("Meet the residents 🐙") and they're all yours; "← Back to portfolio" brings the page back.
 
 **Live at https://michaelbeamish.github.io/** (deployed on every merge to `main`). All the text and links are in

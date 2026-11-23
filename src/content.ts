@@ -20,6 +20,8 @@ export interface Project {
   description: string
   stack: string[]
   links: Link[]
+  /** An invitation shown under the description (the featured project). */
+  challenge?: string
   /** A screenshot of the app (imported, so Vite hashes it) — always with `imageAlt`. */
   image?: string
   imageAlt?: string
@@ -42,20 +44,24 @@ export const PROFILE = {
     "I build web apps people enjoy using. Since 2019 I've written production Vue.js — most of it for " +
       "MicrochipDirect, Microchip Technology's online store, where I helped move the whole frontend from legacy .NET " +
       'to Vue and built its product comparison tool.',
-    'In 2022 I stepped away from software to raise my kids. Now I’m back and building again: Creature World — the ' +
+    'In 2022 I stepped away from software to raise my kids. Now I’m back and building again: The Ink Tank — the ' +
       'little world living behind this page — and this site are my first projects since, made with Vue 3, strict ' +
       'TypeScript, Vitest and a CI + pull-request workflow, with Claude Code as my pair programmer.',
-    "I'm open to frontend and full-stack roles — remote, or I'm happy to relocate.",
+    "I'm open to frontend and full-stack roles — remote, and I'd consider relocating.",
   ],
 }
 
-/** The project the page is built around — it's the world behind the screen. */
+/**
+ * The project the page is built around — it's the world behind the screen. Shown as "The Ink Tank"; the project and
+ * its repo are still called Creature World.
+ */
 export const FEATURED: Project = {
-  title: 'Creature World',
+  title: 'The Ink Tank',
   description:
     'A tiny living tide pool in the browser. Furry, octopus-like creatures with personalities — curious, shy, ' +
-    'friendly or grumpy — notice your cursor and each react in their own way. Boop them, feed them, play fetch, ' +
-    "dress them up. It's the world behind this page.",
+    'friendly or grumpy — notice your cursor and each react in their own way. Boop them, feed them shrimp, drop in ' +
+    "toys, dress them up. It's the world behind this page.",
+  challenge: "Challenge: Cheer up the grumpy one. (They don't love being shaken.)",
   stack: ['Vue 3', 'TypeScript', 'Canvas 2D', 'Web Audio', 'Vitest', 'GitHub Actions'],
   links: [
     { label: 'Open full screen', href: 'https://michaelbeamish.github.io/creature-world/' },
@@ -64,7 +70,7 @@ export const FEATURED: Project = {
 }
 
 export const EARLY_PROJECTS_INTRO =
-  'Built at Galvanize in 2018–19, before my first software job — and long before AI pair programmers. ' +
+  'Student projects from Galvanize, built before my first software job — and long before AI pair programmers. ' +
   "Rough around the edges, but I'm still proud of them."
 
 /**

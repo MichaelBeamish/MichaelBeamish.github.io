@@ -19,7 +19,7 @@
 |---|---|---|
 | `src/main.ts` | Entry: mounts the Vue app | — |
 | `src/App.vue` | The shell: the Creature World iframe, the screen (nav + `PortfolioPage`), the way back; Escape and focus handling; the dev-only tuning panel (lazy, never in production) | — |
-| `src/PortfolioPage.vue` | The portfolio itself: lays out `content.ts` (about, projects, experience, contact); emits `lift` from the Creature World card | — |
+| `src/PortfolioPage.vue` | The portfolio itself: lays out `content.ts` (about, projects, experience, contact); the 2018–19 group is a collapsed `<details>`; emits `lift` from The Ink Tank card | — |
 | `src/content.ts` | Everything the site says, as data: profile, featured project, the 2018–19 projects, experience, education, contact | `Link`, `Project`, `Job`, `PROFILE`, `FEATURED`, `EARLY_PROJECTS_INTRO`, `EARLY_PROJECTS`, `EXPERIENCE`, `EDUCATION`, `CONTACT` |
 | `src/assets/profile.webp` | The profile photo (480 px WebP; imported, so Vite gives it a hashed filename) | — |
 | `src/assets/2019/` | Screenshots for the 2018–19 project cards (the demo videos' thumbnails, 640 px WebP; a friend's name blurred on `love-letter.webp`) | — |
