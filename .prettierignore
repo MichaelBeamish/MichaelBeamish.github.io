@@ -1,0 +1,5 @@
+# Prettier also respects .gitignore.
+pnpm-lock.yaml
+
+# Hand-written docs and skills keep their own formatting.
+*.md
