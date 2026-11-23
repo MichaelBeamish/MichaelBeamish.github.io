@@ -4,7 +4,7 @@ My portfolio site — with a living secret behind it. The page sits on a frosted
 [Creature World](https://github.com/MichaelBeamish/creature-world), a tide pool of curious, furry creatures. Lift the
 screen ("Meet the residents 🐙") and they're all yours; "← Back to portfolio" brings the page back.
 
-**Status:** early spike (local only).
+**Status:** early spike, live at **https://michaelbeamish.github.io/** (deployed on every merge to `main`).
 
 ## Try it
 

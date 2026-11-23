@@ -35,8 +35,7 @@ Claude leads development, and the owner wants to grow as a developer along the w
    optional embed mode) is planned and made in its own repo, with its own workflow.
 
 ## Git workflow (one branch + pull request per task)
-Until the GitHub repo exists (the spike is local), work locally and commit only with approval. Once the repo
-`MichaelBeamish/michaelbeamish.github.io` exists, the same flow as Creature World applies:
+The repo is `MichaelBeamish/MichaelBeamish.github.io` (a GitHub user site; ADR 0002). Same flow as Creature World:
 1. `/plan-task n` → owner approves. 2. `/implement-task n` → branch `task/<n>-<slug>` from an up-to-date `main`.
 3. `/verify-task n`. 4. `/checkpoint` → one approval covers commit + push + PR. 5. CI green → share the link.
 6. **The owner merges.** 7. After the merge: switch to `main`, `git pull --ff-only`, delete the local branch.
