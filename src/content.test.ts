@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import * as content from './content'
-import { CONTACT, EARLY_PROJECTS, FEATURED, PROFILE } from './content'
+import { CONTACT, EARLY_PROJECTS, EMAIL, FEATURED, ICON_NAMES, PROFILE } from './content'
 
 const projects = [FEATURED, ...EARLY_PROJECTS]
 const allLinks = [...projects.flatMap((p) => p.links), ...CONTACT]
@@ -13,6 +13,14 @@ describe('portfolio content', () => {
       expect(p.stack.length, p.title).toBeGreaterThan(0)
       expect(p.links.length, p.title).toBeGreaterThan(0)
     }
+  })
+
+  it('gives every link an icon the page can draw', () => {
+    for (const link of allLinks) expect(ICON_NAMES, link.label).toContain(link.icon)
+  })
+
+  it('shows a plausible email address', () => {
+    expect(EMAIL).toMatch(/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/)
   })
 
   it('only links to https:// or mailto: addresses', () => {

@@ -1,20 +1,53 @@
 <script setup lang="ts">
 // The portfolio itself (task #3): lays out `content.ts`. It knows nothing about the screen or the world behind it —
 // it only asks App to lift the screen ("lift"), from The Ink Tank card.
+import { onBeforeUnmount, ref, useTemplateRef } from 'vue'
 import {
   CONTACT,
   EARLY_PROJECTS,
   EARLY_PROJECTS_INTRO,
   EDUCATION,
+  EMAIL,
   EXPERIENCE,
   FEATURED,
   PROFILE,
 } from './content'
+import LinkIcon from './LinkIcon.vue'
 
 defineEmits<{ lift: [] }>()
 
-/** Links that leave the page open in a new tab (mailto: doesn't). */
-const isExternal = (href: string) => href.startsWith('https://')
+/** Copy-email feedback, and how long it stays before the button resets (ms). */
+const COPY = { resetMs: 2500 }
+type CopyStatus = 'idle' | 'copied' | 'failed'
+const COPY_LABELS: Record<CopyStatus, string> = {
+  idle: 'Copy',
+  copied: 'Copied!',
+  failed: 'Press Ctrl+C',
+}
+const COPY_ANNOUNCEMENTS: Record<CopyStatus, string> = {
+  idle: '',
+  copied: 'Email address copied',
+  failed:
+    'Could not copy automatically. The address is selected: press Ctrl+C, or Command+C on a Mac.',
+}
+
+const copyStatus = ref<CopyStatus>('idle')
+const emailText = useTemplateRef<HTMLElement>('emailText')
+let resetTimer: ReturnType<typeof setTimeout> | undefined
+
+/** Copies the address (Clipboard API: https or localhost). If that fails, selects it for a manual copy. */
+async function copyEmail() {
+  try {
+    await navigator.clipboard.writeText(EMAIL)
+    copyStatus.value = 'copied'
+  } catch {
+    copyStatus.value = 'failed'
+    if (emailText.value) window.getSelection()?.selectAllChildren(emailText.value)
+  }
+  clearTimeout(resetTimer)
+  resetTimer = setTimeout(() => (copyStatus.value = 'idle'), COPY.resetMs)
+}
+onBeforeUnmount(() => clearTimeout(resetTimer))
 </script>
 
 <template>
@@ -49,6 +82,7 @@ const isExternal = (href: string) => href.startsWith('https://')
             target="_blank"
             rel="noopener"
           >
+            <LinkIcon :name="link.icon" />
             {{ link.label
             }}<span class="sr-only"> — {{ FEATURED.title }} (opens in a new tab)</span>
           </a>
@@ -90,6 +124,7 @@ const isExternal = (href: string) => href.startsWith('https://')
                 target="_blank"
                 rel="noopener"
               >
+                <LinkIcon :name="link.icon" />
                 {{ link.label
                 }}<span class="sr-only"> — {{ project.title }} (opens in a new tab)</span>
               </a>
@@ -119,16 +154,28 @@ const isExternal = (href: string) => href.startsWith('https://')
     <section id="contact" aria-labelledby="contact-title">
       <h2 id="contact-title">Contact</h2>
       <p>The best way to reach me is email — I'd love to hear from you.</p>
+      <div class="email">
+        <a :href="`mailto:${EMAIL}`" class="email-link">
+          <LinkIcon name="mail" />
+          <span ref="emailText">{{ EMAIL }}</span>
+        </a>
+        <button type="button" class="copy" @click="copyEmail">
+          <LinkIcon :name="copyStatus === 'copied' ? 'check' : 'copy'" />
+          {{ COPY_LABELS[copyStatus] }}
+        </button>
+        <!-- Announces the result to screen readers (the button's text change alone may not be read). -->
+        <span class="sr-only" role="status">{{ COPY_ANNOUNCEMENTS[copyStatus] }}</span>
+      </div>
       <div class="links">
         <a
           v-for="link in CONTACT"
           :key="link.href"
           :href="link.href"
-          :target="isExternal(link.href) ? '_blank' : undefined"
-          :rel="isExternal(link.href) ? 'noopener' : undefined"
+          target="_blank"
+          rel="noopener"
         >
-          {{ link.label
-          }}<span v-if="isExternal(link.href)" class="sr-only"> (opens in a new tab)</span>
+          <LinkIcon :name="link.icon" />
+          {{ link.label }}<span class="sr-only"> (opens in a new tab)</span>
         </a>
       </div>
     </section>
@@ -337,6 +384,45 @@ h2::after {
   flex-wrap: wrap;
   align-items: center;
   gap: 8px 18px;
+}
+.links a,
+.email-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+/* Contact: the address itself, visible and copyable — not everyone has a mail app set up for mailto: links. */
+.email {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  margin-bottom: 16px;
+  font-size: 1.1rem;
+}
+.email-link {
+  word-break: break-all;
+}
+.copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 7.5em; /* the text changes (Copy → Copied!) without the button jumping */
+  justify-content: center;
+  padding: 5px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: inherit;
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.copy:hover,
+.copy:focus-visible {
+  background: rgba(255, 255, 255, 0.18);
+  outline: 2px solid #ffe9b0;
+  outline-offset: 2px;
 }
 a {
   color: #ffe9b0;
