@@ -24,6 +24,11 @@ This repo is the GitHub *user site*: every merge to `main` is checked and publis
 `https://michaelbeamish.github.io/` by `.github/workflows/deploy.yml` (ADR 0002). Creature World deploys itself to
 `/creature-world/` on the same origin.
 
+## Look
+Headings use Fredoka (self-hosted, `font-display: swap`); body text is the system font. Cards glow softly on hover and
+keyboard focus (`:focus-within`); sections rise into view with a CSS scroll-driven animation (`animation-timeline:
+view()`, inside `@supports`). Everything that moves stops under "reduce motion".
+
 ## Dev tooling
 A dev-only `TuningPanel` (shown only under `pnpm dev`) has sliders for the screen's look and prints the values to
 copy into `SCREEN`. It's imported lazily behind `import.meta.env.DEV`, so production builds leave it out entirely.

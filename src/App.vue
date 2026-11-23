@@ -59,13 +59,15 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeyDown))
   <Transition name="screen">
     <div v-show="screenUp" class="screen" :style="screenStyle(look)">
       <header class="nav">
-        <span class="name">Michael Beamish</span>
+        <span class="name display">Michael Beamish</span>
         <nav aria-label="Main">
           <a href="#about">About</a>
           <a href="#projects">Projects</a>
           <a href="#experience">Experience</a>
           <a href="#contact">Contact</a>
-          <button ref="lift" type="button" class="meet" @click="lift">Meet the residents 🐙</button>
+          <button ref="lift" type="button" class="meet" @click="lift">
+            Meet the residents <span class="octo" aria-hidden="true">🐙</span>
+          </button>
         </nav>
       </header>
       <PortfolioPage @lift="lift" />
@@ -82,6 +84,16 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeyDown))
 </template>
 
 <style>
+/* Fredoka (SIL Open Font License, see assets/fonts/OFL.txt): a rounded, friendly face for headings only.
+   Self-hosted; `swap` shows the system font at once and switches when Fredoka arrives (no invisible text). */
+@font-face {
+  font-family: 'Fredoka';
+  font-style: normal;
+  font-weight: 500 700;
+  font-display: swap;
+  src: url('./assets/fonts/fredoka-latin.woff2') format('woff2');
+}
+
 html,
 body,
 #app {
@@ -89,6 +101,47 @@ body,
   height: 100%;
   background: #0e2a3a;
   font-family: system-ui, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+.display {
+  font-family: 'Fredoka', system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* The 🐙 in "Meet the residents" waves when its button is hovered or focused. */
+.octo {
+  display: inline-block;
+  transform-origin: 50% 80%;
+}
+button:hover .octo,
+button:focus-visible .octo {
+  animation: octo-wiggle 0.8s ease-in-out;
+}
+@keyframes octo-wiggle {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  20% {
+    transform: rotate(-14deg);
+  }
+  45% {
+    transform: rotate(12deg);
+  }
+  70% {
+    transform: rotate(-6deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  button:hover .octo,
+  button:focus-visible .octo {
+    animation: none;
+  }
 }
 </style>
 

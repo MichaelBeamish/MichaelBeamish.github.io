@@ -23,6 +23,7 @@
 | `src/content.ts` | Everything the site says, as data: profile, featured project, the 2018–19 projects, experience, education, contact | `Link`, `Project`, `Job`, `PROFILE`, `FEATURED`, `EARLY_PROJECTS_INTRO`, `EARLY_PROJECTS`, `EXPERIENCE`, `EDUCATION`, `CONTACT` |
 | `src/assets/profile.webp` | The profile photo (480 px WebP; imported, so Vite gives it a hashed filename) | — |
 | `src/assets/2019/` | Screenshots for the 2018–19 project cards (the demo videos' thumbnails, 640 px WebP; a friend's name blurred on `love-letter.webp`) | — |
+| `src/assets/fonts/` | Fredoka (headings; Latin subset, 30 KB woff2) and its license, `OFL.txt` — loaded by the `@font-face` in `src/App.vue` | — |
 | `src/screen.ts` | The screen's look as data (blur, tint, saturate) → CSS custom properties; where Creature World is | `CREATURE_WORLD_URL`, `ScreenLook`, `SCREEN`, `LIMITS`, `clampLook`, `screenStyle` |
 | `src/TuningPanel.vue` | Dev-only sliders to tune the screen's look (spike) | — |
 | `src/codeMap.test.ts` | Drift test for this map | — |
@@ -50,6 +51,9 @@
 
 **Change any text, link or project on the site:** edit `src/content.ts` (layout lives in `src/PortfolioPage.vue`).
 `src/content.test.ts` checks links are `https:`/`mailto:` and that no phone number slips in.
+
+**Change the heading font:** swap the `.woff2` in `src/assets/fonts/` (keep its license beside it), then update the
+`@font-face` and the `h1, h2, h3, h4, .display` rule in the global `<style>` of `src/App.vue`.
 
 **Replace the profile photo:** resize it first (no new dependency — ImageMagick:
 `magick photo.png -resize 480x480 -strip -quality 80 src/assets/profile.webp`), then keep the same filename.
