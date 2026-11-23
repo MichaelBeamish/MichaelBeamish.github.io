@@ -21,7 +21,8 @@ The *why*. For the *where*, see the [code map](code-map.md).
 
 ## Deploy
 This repo is the GitHub *user site*: every merge to `main` is checked and published to
-`https://michaelbeamish.github.io/` by `.github/workflows/deploy.yml` (ADR 0002). Creature World deploys itself to
+`https://michaelbeamish.github.io/` by `.github/workflows/deploy.yml` (ADR 0002). The workflow also passes the latest
+commit's date to the build (`VITE_LAST_UPDATED`), which the footer shows as "Last updated". Creature World deploys itself to
 `/creature-world/` on the same origin.
 
 ## Look

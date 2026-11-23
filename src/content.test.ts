@@ -1,9 +1,17 @@
 import { describe, expect, it } from 'vitest'
 import * as content from './content'
-import { CONTACT, EARLY_PROJECTS, EMAIL, FEATURED, ICON_NAMES, PROFILE } from './content'
+import {
+  CONTACT,
+  EARLY_PROJECTS,
+  EMAIL,
+  FEATURED,
+  ICON_NAMES,
+  PROFILE,
+  SITE_SOURCE,
+} from './content'
 
 const projects = [FEATURED, ...EARLY_PROJECTS]
-const allLinks = [...projects.flatMap((p) => p.links), ...CONTACT]
+const allLinks = [...projects.flatMap((p) => p.links), ...CONTACT, SITE_SOURCE]
 
 describe('portfolio content', () => {
   it('gives every project a title, a description, its stack and at least one link', () => {

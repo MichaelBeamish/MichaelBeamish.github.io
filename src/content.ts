@@ -189,6 +189,13 @@ export const EDUCATION = [
 /** Shown on the page (with a Copy button) — not everyone has a mail app set up for `mailto:` links. */
 export const EMAIL = 'michaelbeamish89@gmail.com'
 
+/** This site's own code, linked from the footer. */
+export const SITE_SOURCE: Link = {
+  label: 'Source on GitHub',
+  href: 'https://github.com/MichaelBeamish/MichaelBeamish.github.io',
+  icon: 'github',
+}
+
 /** The other ways to reach the owner (email has its own row, see `EMAIL`). */
 export const CONTACT: Link[] = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/michael-beamish/', icon: 'linkedin' },
