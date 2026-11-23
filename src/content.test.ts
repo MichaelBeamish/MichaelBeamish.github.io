@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import indexHtml from '../index.html?raw'
 import * as content from './content'
 import {
   CONTACT,
@@ -36,6 +37,14 @@ describe('portfolio content', () => {
     for (const link of allLinks) {
       expect(link.href, link.label).toMatch(/^(https:\/\/|mailto:|\/[^/])/)
     }
+  })
+
+  // Link previews: the image must be an absolute URL on this site, pointing at a real file in public/.
+  it('points the link-preview image (og:image) at a file that exists in public/', () => {
+    const image = /<meta property="og:image" content="([^"]+)"/.exec(indexHtml)?.[1] ?? ''
+    expect(image).toMatch(/^https:\/\/michaelbeamish\.github\.io\//)
+    const path = image.replace('https://michaelbeamish.github.io', '/public')
+    expect(Object.keys(import.meta.glob('/public/**/*'))).toContain(path)
   })
 
   // Site-relative links (e.g. /resume.pdf) are files in public/, which Vite serves as-is: they must exist.

@@ -36,6 +36,9 @@
 | File | What it does |
 |---|---|
 | `public/resume.pdf` | The owner's phone-free résumé, served as-is at `/resume.pdf` (linked as `RESUME` in About and Contact) |
+| `public/og-image.jpg` | The link-preview card (1200×630) named by `og:image` in `index.html` |
+| `docs/og-card/` | The card's source (`og-card.html` + `background.jpg`), to remake `public/og-image.jpg` |
+| `index.html` | The page shell: `<title>`, description, canonical URL and the link-preview (Open Graph / Twitter) tags |
 | `vite.config.ts` | Vite + Vitest config (`base` `/`: a GitHub user site is served from the domain root) |
 | `.github/workflows/ci.yml` | CI on every PR and push to `main`: format, lint, typecheck, test, build |
 | `.github/workflows/deploy.yml` | Deploy on every push to `main`: the same checks, then publish `dist/` to GitHub Pages (ADR 0002); passes the latest commit's date to the build as `VITE_LAST_UPDATED` |
@@ -56,6 +59,11 @@
 
 **Change any text, link or project on the site:** edit `src/content.ts` (layout lives in `src/PortfolioPage.vue`).
 `src/content.test.ts` checks links are `https:`/`mailto:` and that no phone number slips in.
+
+**Remake the link-preview image:** edit `docs/og-card/og-card.html`, then render it at 1200×630 and save it as
+`public/og-image.jpg` (Chrome: `chrome --headless=new --window-size=1200,630 --allow-file-access-from-files
+--screenshot=og.png file:///…/docs/og-card/og-card.html`, then convert to JPEG). Previews are cached: after the deploy,
+refresh LinkedIn's with its Post Inspector. `src/content.test.ts` checks `og:image` points at a real file.
 
 **Update the résumé on the site:** export a copy **without the phone number**, read it in full (and check its links),
 then replace `public/resume.pdf` — same name, so the link never changes. The private copy (with the phone number)
